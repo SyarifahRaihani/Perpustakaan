@@ -14,7 +14,7 @@ class Bahasa extends Migration
             'nama'  =>[ 'type' => 'varchar','constraint'=>50,'null'=>false],
             
         ]);
-        $this->forge->addPrimarykey('kode');
+        $this->forge->addPrimarykey('id');
         $this->forge->createTable('bahasa');
     }
 
