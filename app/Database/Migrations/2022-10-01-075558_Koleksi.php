@@ -3,7 +3,7 @@
 namespace App\Database\Migrations;
 
 use CodeIgniter\Database\Migration;
-use PHPUnit\Framework\Constraint\Constraint;
+
 
 class Koleksi extends Migration
 {
@@ -31,13 +31,12 @@ class Koleksi extends Migration
             'deleted_at'    =>[ 'type' => 'datetime', 'null'=>true]
         ]);
         $this->forge->addPrimaryKey('id');
-        $this->forge->addForeignKey('penerbit_id', 'penerbit', 'id', 'cascade', 'set null');
-        $this->forge->addForeignKey('klasifikasi_id', 'klasifikasi', 'id', 'cascade', 'set null');
-        $this->forge->addForeignKey('kategori_id', 'kategori', 'id', 'cascade', 'set null');
-        $this->forge->addForeignKey('bahasa_id', 'bahasa', 'id', 'cascade', 'set null');
-        $this->forge->addForeignKey('pustakawan_id', 'pustakawan', 'id', 'cascade', 'set null');
+        $this->forge->addForeignKey('penerbit_id', 'penerbit', 'id', 'cascade');
+        $this->forge->addForeignKey('klasifikasi_id', 'klasifikasi', 'id', 'cascade' );
+        $this->forge->addForeignKey('kategori_id', 'kategori', 'id', 'cascade' );
+        $this->forge->addForeignKey('bahasa_id', 'bahasa', 'id', 'cascade' );
+        $this->forge->addForeignKey('pustakawan_id', 'pustakawan', 'id', 'cascade' );
         $this->forge->createTable('koleksi');
-
     }
 
     public function down()
