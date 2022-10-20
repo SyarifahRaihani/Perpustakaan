@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuites>
+  <testsuite name="" tests="3" assertions="1" errors="2" warnings="0" failures="0" skipped="0" time="0.179080">
+    <testsuite name="App" tests="3" assertions="1" errors="2" warnings="0" failures="0" skipped="0" time="0.179080">
+      <testsuite name="ExampleDatabaseTest" file="C:\wp2\tests\database\ExampleDatabaseTest.php" tests="2" assertions="0" errors="2" warnings="0" failures="0" skipped="0" time="0.173588">
+        <testcase name="testModelFindAll" class="ExampleDatabaseTest" classname="ExampleDatabaseTest" file="C:\wp2\tests\database\ExampleDatabaseTest.php" line="17" assertions="0" time="0.168262">
+          <error type="CodeIgniter\Database\Exceptions\DatabaseException">ExampleDatabaseTest::testModelFindAll
+CodeIgniter\Database\Exceptions\DatabaseException: Unable to connect to the database.&#13;
+Main connection [SQLite3]: Class 'SQLite3' not found
+
+C:\wp2\vendor\codeigniter4\framework\system\Database\BaseConnection.php:418
+C:\wp2\vendor\codeigniter4\framework\system\Database\SQLite3\Connection.php:48
+C:\wp2\vendor\codeigniter4\framework\system\Test\DatabaseTestTrait.php:74
+C:\wp2\vendor\codeigniter4\framework\system\Test\DatabaseTestTrait.php:54
+C:\wp2\vendor\codeigniter4\framework\system\Test\CIUnitTestCase.php:247
+phpvfscomposer://C:\wp2\vendor\phpunit\phpunit\phpunit:97</error>
+        </testcase>
+        <testcase name="testSoftDeleteLeavesRow" class="ExampleDatabaseTest" classname="ExampleDatabaseTest" file="C:\wp2\tests\database\ExampleDatabaseTest.php" line="28" assertions="0" time="0.005326">
+          <error type="CodeIgniter\Database\Exceptions\DatabaseException">ExampleDatabaseTest::testSoftDeleteLeavesRow
+CodeIgniter\Database\Exceptions\DatabaseException: Unable to connect to the database.&#13;
+Main connection [SQLite3]: Class 'SQLite3' not found
+
+C:\wp2\vendor\codeigniter4\framework\system\Database\BaseConnection.php:418
+C:\wp2\vendor\codeigniter4\framework\system\Database\SQLite3\Connection.php:48
+C:\wp2\vendor\codeigniter4\framework\system\Test\DatabaseTestTrait.php:74
+C:\wp2\vendor\codeigniter4\framework\system\Test\DatabaseTestTrait.php:54
+C:\wp2\vendor\codeigniter4\framework\system\Test\CIUnitTestCase.php:247
+phpvfscomposer://C:\wp2\vendor\phpunit\phpunit\phpunit:97</error>
+        </testcase>
+      </testsuite>
+      <testsuite name="ExampleSessionTest" file="C:\wp2\tests\session\ExampleSessionTest.php" tests="1" assertions="1" errors="0" warnings="0" failures="0" skipped="0" time="0.005492">
+        <testcase name="testSessionSimple" class="ExampleSessionTest" classname="ExampleSessionTest" file="C:\wp2\tests\session\ExampleSessionTest.php" line="11" assertions="1" time="0.005492"/>
+      </testsuite>
+    </testsuite>
+  </testsuite>
+</testsuites>

@@ -1,0 +1,38 @@
+ERROR - 2022-10-13 02:24:51 --> Error connecting to the database: Error: Class 'SQLite3' not found in C:\wp2\vendor\codeigniter4\framework\system\Database\SQLite3\Connection.php:74
+Stack trace:
+#0 C:\wp2\vendor\codeigniter4\framework\system\Database\BaseConnection.php(382): CodeIgniter\Database\SQLite3\Connection->connect(false)
+#1 C:\wp2\vendor\codeigniter4\framework\system\Database\SQLite3\Connection.php(48): CodeIgniter\Database\BaseConnection->initialize()
+#2 C:\wp2\vendor\codeigniter4\framework\system\Test\DatabaseTestTrait.php(74): CodeIgniter\Database\SQLite3\Connection->initialize()
+#3 C:\wp2\vendor\codeigniter4\framework\system\Test\DatabaseTestTrait.php(54): ExampleDatabaseTest->loadDependencies()
+#4 C:\wp2\vendor\codeigniter4\framework\system\Test\CIUnitTestCase.php(247): ExampleDatabaseTest->setUpDatabase()
+#5 C:\wp2\vendor\phpunit\phpunit\src\Framework\TestCase.php(1147): CodeIgniter\Test\CIUnitTestCase->setUp()
+#6 C:\wp2\vendor\phpunit\phpunit\src\Framework\TestResult.php(728): PHPUnit\Framework\TestCase->runBare()
+#7 C:\wp2\vendor\phpunit\phpunit\src\Framework\TestCase.php(904): PHPUnit\Framework\TestResult->run(Object(ExampleDatabaseTest))
+#8 C:\wp2\vendor\phpunit\phpunit\src\Framework\TestSuite.php(673): PHPUnit\Framework\TestCase->run(Object(PHPUnit\Framework\TestResult))
+#9 C:\wp2\vendor\phpunit\phpunit\src\Framework\TestSuite.php(673): PHPUnit\Framework\TestSuite->run(Object(PHPUnit\Framework\TestResult))
+#10 C:\wp2\vendor\phpunit\phpunit\src\Framework\TestSuite.php(673): PHPUnit\Framework\TestSuite->run(Object(PHPUnit\Framework\TestResult))
+#11 C:\wp2\vendor\phpunit\phpunit\src\TextUI\TestRunner.php(673): PHPUnit\Framework\TestSuite->run(Object(PHPUnit\Framework\TestResult))
+#12 C:\wp2\vendor\phpunit\phpunit\src\TextUI\Command.php(144): PHPUnit\TextUI\TestRunner->run(Object(PHPUnit\Framework\TestSuite), Array, Array, true)
+#13 C:\wp2\vendor\phpunit\phpunit\src\TextUI\Command.php(97): PHPUnit\TextUI\Command->run(Array, true)
+#14 phpvfscomposer://C:\wp2\vendor\phpunit\phpunit\phpunit(97): PHPUnit\TextUI\Command::main()
+#15 C:\wp2\vendor\bin\phpunit(118): include('phpvfscomposer:...')
+#16 {main}
+ERROR - 2022-10-13 02:24:52 --> Error connecting to the database: Error: Class 'SQLite3' not found in C:\wp2\vendor\codeigniter4\framework\system\Database\SQLite3\Connection.php:74
+Stack trace:
+#0 C:\wp2\vendor\codeigniter4\framework\system\Database\BaseConnection.php(382): CodeIgniter\Database\SQLite3\Connection->connect(false)
+#1 C:\wp2\vendor\codeigniter4\framework\system\Database\SQLite3\Connection.php(48): CodeIgniter\Database\BaseConnection->initialize()
+#2 C:\wp2\vendor\codeigniter4\framework\system\Test\DatabaseTestTrait.php(74): CodeIgniter\Database\SQLite3\Connection->initialize()
+#3 C:\wp2\vendor\codeigniter4\framework\system\Test\DatabaseTestTrait.php(54): ExampleDatabaseTest->loadDependencies()
+#4 C:\wp2\vendor\codeigniter4\framework\system\Test\CIUnitTestCase.php(247): ExampleDatabaseTest->setUpDatabase()
+#5 C:\wp2\vendor\phpunit\phpunit\src\Framework\TestCase.php(1147): CodeIgniter\Test\CIUnitTestCase->setUp()
+#6 C:\wp2\vendor\phpunit\phpunit\src\Framework\TestResult.php(728): PHPUnit\Framework\TestCase->runBare()
+#7 C:\wp2\vendor\phpunit\phpunit\src\Framework\TestCase.php(904): PHPUnit\Framework\TestResult->run(Object(ExampleDatabaseTest))
+#8 C:\wp2\vendor\phpunit\phpunit\src\Framework\TestSuite.php(673): PHPUnit\Framework\TestCase->run(Object(PHPUnit\Framework\TestResult))
+#9 C:\wp2\vendor\phpunit\phpunit\src\Framework\TestSuite.php(673): PHPUnit\Framework\TestSuite->run(Object(PHPUnit\Framework\TestResult))
+#10 C:\wp2\vendor\phpunit\phpunit\src\Framework\TestSuite.php(673): PHPUnit\Framework\TestSuite->run(Object(PHPUnit\Framework\TestResult))
+#11 C:\wp2\vendor\phpunit\phpunit\src\TextUI\TestRunner.php(673): PHPUnit\Framework\TestSuite->run(Object(PHPUnit\Framework\TestResult))
+#12 C:\wp2\vendor\phpunit\phpunit\src\TextUI\Command.php(144): PHPUnit\TextUI\TestRunner->run(Object(PHPUnit\Framework\TestSuite), Array, Array, true)
+#13 C:\wp2\vendor\phpunit\phpunit\src\TextUI\Command.php(97): PHPUnit\TextUI\Command->run(Array, true)
+#14 phpvfscomposer://C:\wp2\vendor\phpunit\phpunit\phpunit(97): PHPUnit\TextUI\Command::main()
+#15 C:\wp2\vendor\bin\phpunit(118): include('phpvfscomposer:...')
+#16 {main}
