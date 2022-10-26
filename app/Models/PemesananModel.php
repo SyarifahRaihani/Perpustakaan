@@ -4,10 +4,10 @@ namespace App\Models;
 
 use CodeIgniter\Model;
 
-class StokKoleksiModel extends Model
+class PemesananModel extends Model
 {
     protected $DBGroup          = 'default';
-    protected $table            = 'stokkoleksi';
+    protected $table            = 'pemesanan';
     protected $primaryKey       = 'id';
     protected $useAutoIncrement = true;
     protected $insertID         = 0;
@@ -23,6 +23,8 @@ class StokKoleksiModel extends Model
     protected $updatedField  = 'updated_at';
     protected $deletedField  = 'deleted_at';
 
+    // Validation
+    protected $validationRules      = [];
     protected $validationMessages   = [];
     protected $skipValidation       = false;
     protected $cleanValidationRules = true;
