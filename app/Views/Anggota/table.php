@@ -1,13 +1,15 @@
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" 
-            rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+            rel="stylesheet" crossorigin="anonymous">
         <script src="https://cdn.jsdelivr.com/jquery-3.6.1.min.js" 
             crossorigin="anonymous"></script>
-        <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js" integrity="sha384-IQsoLXl5PILFhosVNubq5LC7Qb9DXgDA9i+tQ8Zj3iwWAwPtgFTxbJ8NT4GN1R8p" 
+        <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"  
             crossorigin="anonymous"></script>
-        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js" integrity="sha384-cVKIPhGWiC2Al4u+LWgxfKTRIcfu0JTxR+EQDz/bgldoEyl4H0zUF0QKbrJ0EcQF" 
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js"  
             crossorigin="anonymous"></script>
             <script src="https://cdn.jsdelivr.net/gh/agoenxz2186/submitAjax@develop/submit_ajax.js" 
             crossorigin="anonymous"></script>
+        <link href="//cdn.datatables.net/1.12.1/css/jquery.dataTables.min.css" rel="stylesheet"> 
+        <script src="//cdn.datatables.net/1.12.1/js/jquery.dataTables.min.js"></script>
 <table id='table-anggota' class="database table table-bordered">
     <thead>
         <tr>
@@ -38,18 +40,37 @@
                 method: 'GET'
             },
             columns:[
-                { data: 'id', sortable:false, searc},
+                { data: 'id', sortable:false, searchable:false,
+                  render: (data,type,row,meta)=>{
+                        return meta.settings._iDisplayStart + meta.row + 1;
+                    }
+                },
                 { data: 'nama_depan'},
                 { data: 'nama_belakang'},
                 { data: 'email'},
                 { data: 'nohp'},
                 { data: 'alamat'},
                 { data: 'kota'},
-                { data: 'gender'},
+                { data: 'gender',
+                    render: (data, type, meta, row)=>{
+                    if(data === 'L'){
+                        return 'Laki-Laki';
+                    }else if( data === 'P'){
+                        return 'Perempuan';
+                    }
+                    return data;
+                  }
+                },
                 { data: 'tgl_daftar'},
                 { data: 'berlaku_awal'},
                 { data: 'berlaku_akhir'},
-                {data: 'id'}
+                {data: 'id',
+                    render: (data,type, meta, row)=>{
+                    var btnEdit = `<button class='btn-edit' data-id='$(data)'>Edit</button>`;
+                    var btnHapus = `<button class='btn-Hapus' data-id='$(data)'>Hapus</button>`;
+                    return btnEdit + btnHapus;
+                  }
+                }
             ]
         });
     });

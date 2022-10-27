@@ -12,7 +12,7 @@ class Pustakawan extends Migration
             'id'            => [ 'type' => 'int', 'constraint' => 10, 'unsigned'=>true, 'auto_increment'=>true ],
             'nama_lengkap'  => [ 'type' => 'varchar', 'constraint'=> 80, 'null'=>false ],
             'gender'        => [ 'type' => 'enum("L", "P")', 'null'=>true ],
-            'tgl_lahir'     => [ 'type' => 'datetime', 'null'=>true ],
+            'tgl_lahir'     => [ 'type' => 'date', 'null'=>true ],
             'level'         => [ 'type' => 'enum("P", "K")', 'null'=>true ],
             'email'         => [ 'type' => 'varchar', 'constraint'=> 255, 'null'=>true ],
             'sandi'         => [ 'type' => 'varchar', 'constraint'=> 60, 'null'=>true ],

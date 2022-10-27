@@ -16,15 +16,14 @@ class KoleksiSeeder extends Seeder
             'penerbit_id'       => '1',
             'penulis'           => 'Saleh',
             'thn_terbit'      => '2020',
-            #'klasifikasi_id'    => '',
-            #'jenis_id'          => ,
+            'klasifikasi_id'    => 1,
             'juml_halaman'      => '200',
-            #'isbn'              => ,
-            #'bahasa_id'         => ,
+            'isbn'              => 1,
+            'bahasa_id'         => 1,
             'stok'              => '100',
-            'eksempler'         => '100',
-            #'kategori_id'       => ,
-            #'pustakawan_id'     => ,
+            'eksemplar'         => '100',
+            'kategori_id'       => 1,
+            'pustakawan_id'     => 1,
 
         ]);
         echo "hasil insert $r";
