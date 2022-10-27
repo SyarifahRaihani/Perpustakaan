@@ -2,6 +2,9 @@
 
 namespace Config;
 
+use CodeIgniter\Router\RouteCollection;
+use CodeIgniter\Router\RouteCollectionInterface;
+
 // Create a new instance of our RouteCollection class.
 $routes = Services::routes();
 
@@ -36,6 +39,32 @@ $routes->set404Override();
 // We get a performance increase by specifying the default
 // route since we don't have to scan directories.
 $routes->get('/', 'Home::index');
+
+$routes->group('login', function(RouteCollection $routes){
+    $routes->get('lupa', 'PustakawanController::viewLupaPassword');
+    $routes->get('/', 'PustakawanController::viewLogin');
+    $routes->post('/', 'PustakawanController::login');
+    $routes->delete('/', 'PustakawanController::logout');
+    $routes->patch('/', 'PustawakanController::lupaPassword');
+});
+
+$routes->group('pustakawan', function(RouteCollection $routes){
+    $routes->get('/', 'PustakawanController::index');
+    $routes->post('/', 'PustakawanController::store');
+    $routes->patch('/', 'PustakawanController::update');
+    $routes->delete('/', 'PustakawanController::delete');
+    $routes->get('(:num)', 'PustakawanController::show/$1');
+    $routes->get('all', 'PustakawanController::all');
+});
+
+$routes->group('anggota', function(RouteCollection $routes){
+    $routes->get('/', 'AnggotaController::index');
+    $routes->post('/', 'AnggotaController::store');
+    $routes->patch('/', 'AnggotaController::update');
+    $routes->delete('/', 'AnggotaController::delete');
+    $routes->get('(:num)', 'AnggotaController::show/$1');
+    $routes->get('all', 'AnggotaController::all');
+});
 
 /*
  * --------------------------------------------------------------------
