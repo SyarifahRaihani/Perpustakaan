@@ -13,12 +13,12 @@ class AnggotaController extends BaseController
 {
     public function index()
     {
-        
+        return view('Anggota/table');
     }
 
     public function all(){
         $pm = new AnggotaModel();
-        $pm->select('id', 'nama_depan', 'nama_belakang', 'email', 'nohp', 'alamat', 'kota', 'gender', 'tgl_daftar', 'status_aktif', 'berlaku_awal', 'berlaku_akhir');
+        $pm->select('id, nama_depan, nama_belakang, email, nohp, alamat, kota, gender, tgl_daftar, status_aktif, berlaku_awal, berlaku_akhir');
 
         return (new Datatable( $pm))
                 ->setFieldFilter(['nama_depan', 'nama_belakang', 'email', 'nohp', 'alamat', 'kota', 'gender', 'tgl_daftar', 'status_aktif', 'berlaku_awal', 'berlaku_akhir'])

@@ -20,9 +20,16 @@ class PustakawanTest extends CIUnitTestCase{
     public function testCreateShowUpdateDelete(){
         $json = $this->call('post', 'pustakawan', [
             'nama_lengkap'      => 'Testing nama',
-            'gender'    => 'P',
-            'email'     => 'testing@email.com',
-            'sandi'     =>'testing'
+            'gender'            => 'P',
+            'tgl_lahir'         => '2022-01-01',
+            'level'             => 'testing level',
+            'email'             => 'testing@email.com',
+            'sandi'             =>'testing',
+            'nohp'              => '085849999627',
+            'alamat'            => 'testing alamat',
+            'kota'              => 'testing kota',
+            'token_reset'       => '123456789'
+
         ])->getJSON();
         $js = json_decode($json, true);
 
@@ -34,7 +41,13 @@ class PustakawanTest extends CIUnitTestCase{
         $this->call('patch', 'pustakawan', [
             'nama_lengkap'      => 'Testing pustakawan update',
             'gender'    => 'P',
+            'tgl_lahir' => '2022-01-01',
+            'level'     => 'testing level update',
             'email'     => 'testingupdate@gmail.com',
+            'nohp'      => '085849999627',
+            'alamat'    => 'testing alamat update',
+            'kota'      => 'testing kota update',
+            'token_reset' => '123456789',
             'id'        => $js['id']
         ])->assertStatus(200);
 

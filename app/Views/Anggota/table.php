@@ -10,29 +10,50 @@
             crossorigin="anonymous"></script>
         <link href="//cdn.datatables.net/1.12.1/css/jquery.dataTables.min.css" rel="stylesheet"> 
         <script src="//cdn.datatables.net/1.12.1/js/jquery.dataTables.min.js"></script>
-<table id='table-anggota' class="database table table-bordered">
-    <thead>
-        <tr>
-            <th>No</th>
-            <th>Nama Depan</th>
-            <th>nama Belakang</th>
-            <th>Email</th>
-            <th>No HP</th>
-            <th>Alamat</th>
-            <th>Kota</th>
-            <th>Gender</th>
-            <th>Tanggal Daftar</th>
-            <th>Status Aktif</th>
-            <th>Berlaku Awal</th>
-            <th>Berlaku Akhir</th>
-            <th>Aksi</th>
-        </tr>
-    </thead>
-</table>
+    
+<div class="container">
+    <button class="float-end btn btn-sm btn-primary" id="btn-tambah">Tambah</button>
+
+    <table id='table-pelanggan' class="datatable table table-bordered">
+        <thead>
+            <tr>
+                <th>No</th>
+                <th>Nama Depan</th>
+                <th>nama Belakang</th>
+                <th>Email</th>
+                <th>No HP</th>
+                <th>Alamat</th>
+                <th>Kota</th>
+                <th>Gender</th>
+                <th>Tanggal Daftar</th>
+                <th>Status Aktif</th>
+                <th>Berlaku Awal</th>
+                <th>Berlaku Akhir</th>
+                <th>Aksi</th>
+            </tr>
+        </thead>
+    </table>
+</div>
+
+<div id="modalForm" class="modal">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header"></div>
+            <div class="modal-body"></div>
+            <div class="modal-footer"></div>
+        </div>
+    </div>
+</div>
 
 <script>
     $(document).ready(function(){
-        $('table#table-anggota').DataTable({
+        $('button#btn-tambah').on('click', function(){
+        $('modalForm').modal('show');
+
+
+        $('form#formPustakawan').trigger('reset');
+        });
+        $('table#table-pelanggan').DataTable({
             processing: true,
             serverSide: true,
             ajax:{
