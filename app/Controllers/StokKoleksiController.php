@@ -13,7 +13,7 @@ class StokKoleksiController extends BaseController
         return view('StokKoleksi/table');
     }
     public function all(){
-        $pm =new StokKoleksi();
+        $pm =new StokKoleksiModel();
         $pm->select('id, koleksi_id, nomor, status_tersedia, anggota_id, pustakawan_id, created_id, updated_at, deleted_at');
 
         return (new Datatable( $pm ))

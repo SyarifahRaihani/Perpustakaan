@@ -6,8 +6,9 @@
             crossorigin="anonymous"></script>
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js" integrity="sha384-cVKIPhGWiC2Al4u+LWgxfKTRIcfu0JTxR+EQDz/bgldoEyl4H0zUF0QKbrJ0EcQF" 
             crossorigin="anonymous"></script>
-            <script src="https://cdn.jsdelivr.net/gh/agoenxz2186/submitAjax@develop/submit_ajax.js"
-            crossorigin="anon ymous"></script>
+        <script src="https://cdn.jsdelivr.net/gh/agoenxz2186/submitAjax@develop/submit_ajax.js"></script>
+        <link href="//cdn.datatables.net/1.12.1/css/jquery.dataTables.min.css" rel="stylesheet">
+        <script src="//cdn.datatables.net/1.12.1/js/jquery.dataTables.min.js"></script>
 <table> id='tabel-stok_koleksi' class="database table-bordered">
     <thead>
         <tr>
