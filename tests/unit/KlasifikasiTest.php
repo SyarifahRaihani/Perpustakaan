@@ -40,6 +40,7 @@ class KlasifikasiTest extends CIUnitTestCase{
         ])->assertStatus(200);
     }
 
+    
     public function testRead(){
         $this->call('get', 'klasifikasi/all')
                 ->assertStatus(200);

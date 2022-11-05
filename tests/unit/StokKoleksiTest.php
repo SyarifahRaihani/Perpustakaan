@@ -51,6 +51,7 @@ class StokKoleksiTest extends CIUnitTestCase{
         ])->assertStatus(200);
     }
 
+    
     public function testRead(){
         $this->call('get', 'StokKoleksi/all')
                 ->assertStatus(200);
