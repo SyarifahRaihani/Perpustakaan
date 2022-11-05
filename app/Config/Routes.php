@@ -2,8 +2,10 @@
 
 namespace Config;
 
+use CodeIgniter\Router\RouteCollection;
+
 // Create a new instance of our RouteCollection class.
-$routes = Services::routes();
+$routes = Services::routes(); 
 
 // Load the system's routing file first, so that the app and ENVIRONMENT
 // can override as needed.
@@ -37,19 +39,59 @@ $routes->set404Override();
 // route since we don't have to scan directories.
 $routes->get('/', 'Home::index');
 
-/*
- * --------------------------------------------------------------------
- * Additional Routing
- * --------------------------------------------------------------------
- *
- * There will often be times that you need additional routing and you
- * need it to be able to override any defaults in this file. Environment
- * based routes is one such time. require() additional route files here
- * to make that happen.
- *
- * You will have access to the $routes object within that file without
- * needing to reload it.
- */
-if (is_file(APPPATH . 'Config/' . ENVIRONMENT . '/Routes.php')) {
-    require APPPATH . 'Config/' . ENVIRONMENT . '/Routes.php';
-}
+$routes->group('login', function(RouteCollection $routes){
+    $routes->get('lupa', 'KlasifikasiController::ViewLupaPassword');
+    $routes->get('/', 'KlasifikasiController::ViewLogin');
+    $routes->post('/', 'KlasifikasiController::Login');
+    $routes->delete('/', 'KlasifikasiController::Logout');
+    $routes->patch('/', 'KlasifikasiController::LupaPassword');
+
+});
+
+$routes->group('Klasifikasi', function(RouteCollection $routes){
+    $routes->get('/', 'KlasifikasiController::index');
+    $routes->post('/', 'KlasifikasiController::store');
+    $routes->patch('/', 'KlasifikasiController::update');
+    $routes->delete('/', 'KlasifikasiController::delete');
+    $routes->get('(:num:', 'KlasifikasiController::show/$1');
+    $routes->get('/', 'KlasifikasiController::all');
+});
+
+$routes->group('login', function(RouteCollection $routes){
+    $routes->get('lupa', 'PemesananController::ViewLupaPassword');
+    $routes->get('/', 'PemesananController::ViewLogin');
+    $routes->post('/', 'PemesananController::Login');
+    $routes->delete('/', 'PemesananController::Logout');
+    $routes->patch('/', 'PemesananController::LupaPassword');
+
+});
+
+$routes->group('Pemesanan', function(RouteCollection $routes){
+    $routes->get('/', 'PemesananController::index');
+    $routes->post('/', 'PemesananController::store');
+    $routes->patch('/', 'PemesananController::update');
+    $routes->delete('/', 'PemesananController::delete');
+    $routes->get('(:num:', 'PemesananController::show/$1');
+    $routes->get('/', 'PemesananController::all');
+});
+
+$routes->group('login', function(RouteCollection $routes){
+    $routes->get('lupa', 'StokKoleksiController::ViewLupaPassword');
+    $routes->get('/', 'StokKoleksiController::ViewLogin');
+    $routes->post('/', 'StokKoleksiController::Login');
+    $routes->delete('/', 'StokKoleksiController::Logout');
+    $routes->patch('/', 'StokKoleksiController::LupaPassword');
+
+});
+
+$routes->group('StokKoleksi', function(RouteCollection $routes){
+    $routes->get('/', 'StokKoleksiController::index');
+    $routes->post('/', 'StokKoleksiController::store');
+    $routes->patch('/', 'StokKoleksiController::update');
+    $routes->delete('/', 'StokKoleksiController::delete');
+    $routes->get('(:num:', 'StokKoleksiController::show/$1');
+    $routes->get('/', 'StokKoleksiController::all');
+});
+
+
+     

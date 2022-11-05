@@ -10,12 +10,17 @@
         <link href="//cdn.datatables.net/1.12.1/css/jquery.dataTables.min.css" rel="stylesheet">
         <script src="//cdn.datatables.net/1.12.1/js/jquery.dataTables.min.js"></script>
         
-<table id='table-klasifikasi' class="database table-bordered">
+<table id='table-pemesanan' class="database table-bordered">
     <thead>
         <tr>
             <th>No</th>
-            <th>Ddc</th>
-            <th>Nama</th>
+            <th>Tgl_awal</th>
+            <th>Tgl_akhir</th>
+            <th>Koleksi_id</th>
+            <th>Status_pesan</th>
+            <th>Created_at</th>
+            <th>Updated_at</th>
+            <th>Deleted_at</th>
             <th>Aksi</th>
         </tr>
     </thead>
@@ -23,17 +28,22 @@
 
 <script>
     $(document).ready(function(){
-        $('table#table-klasifikasi').DataTable({
+        $('table#table-pemesanan').DataTable({
             processing: true,
             serverSide: true,
             ajax:{
-                url: "<?=base_url('klasifikasi/all')?>",
+                url: "<?=base_url('pemesanan/all')?>",
                 method: 'GET'
             },
             columns:[
                 { data: 'id', sortable:false, searc},
-                { data: 'ddc'},
-                { data: 'nama'},
+                { data: 'tgl_awal'},
+                { data: 'tgl_akhir'}, 
+                { data: 'koleksi_id'},
+                { data: 'status_pesan'},
+                { data: 'created_at'},
+                { data: 'updated_at'},
+                { data: 'deleted_at'},
                 { data: 'id'}
             ]
         });
