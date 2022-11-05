@@ -9,6 +9,7 @@
         <script src="https://cdn.jsdelivr.net/gh/agoenxz2186/submitAjax@develop/submit_ajax.js"></script>
         <link href="//cdn.datatables.net/1.12.1/css/jquery.dataTables.min.css" rel="stylesheet">
         <script src="//cdn.datatables.net/1.12.1/js/jquery.dataTables.min.js"></script>
+       
         
 <table id='table-klasifikasi' class="database table-bordered">
     <thead>
