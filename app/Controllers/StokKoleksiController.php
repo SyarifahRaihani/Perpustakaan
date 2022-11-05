@@ -62,6 +62,7 @@ class StokKoleksiController extends BaseController
         return $this->response->setJSON(['result'=>$hasil]);
         
     }
+    
     public function delete(){
         $pm     = new StokKoleksiModel();
         $id     = $this->request->getVar('id');

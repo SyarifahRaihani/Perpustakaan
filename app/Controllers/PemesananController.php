@@ -18,7 +18,7 @@ class PemesananController extends BaseController
         $pm = new PemesananModel();
         $pm->select('id, tgl_awal, tgl_akhir, koleksi_id, anggota_id, status_pesan, created_at, update_at, deleted_at');
 
-        return (new DataTable( $pm ))
+        return (new Datatable( $pm ))
                 ->setFieldFilter(['tgl_awal', 'tgl_akhir', 'koleksi_id', 'anggota_id', 'status_pesan', 'created_at', 'update_at', 'deleted_at'])
                 ->draw();
     }
@@ -44,6 +44,7 @@ class PemesananController extends BaseController
         return $this->response->setJSON(['id => $id'])
                     ->setStatusCode( intval($id) > 0 ? 200 : 406);
     }
+
     public function update(){
         $pm     = new PemesananModel();
         $id     = (int)$this->request->getVar('id');

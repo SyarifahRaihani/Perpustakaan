@@ -24,6 +24,7 @@ class KlasifikasiController extends BaseController
                 ->setFieldFilter(['id', 'ddc', 'nama'])
                 ->draw();     
     }
+    
     public function show($id){
         $r = (new KlasifikasiModel())->where('id', $id)->first();
         if($r == null)throw PageNotFoundException::forPageNotFound();
