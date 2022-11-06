@@ -8,6 +8,7 @@
 
 <div class="container">
     <button class="float-end btn btn-primary" id="btn-nanbah">Tambah</button>
+    
     <table id='table-koleksi' class="database table-bordered">
         <thead>
             <tr>
