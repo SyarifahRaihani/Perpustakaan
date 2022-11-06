@@ -4,10 +4,10 @@ namespace App\Models;
 
 use CodeIgniter\Model;
 
-class PenerbitModel extends Model
+class TransaksiModel extends Model
 {
     protected $DBGroup          = 'default';
-    protected $table            = 'penerbit';
+    protected $table            = 'transaksi';
     protected $primaryKey       = 'id';
     protected $useAutoIncrement = true;
     protected $insertID         = 0;

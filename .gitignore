@@ -125,3 +125,21 @@ nb-configuration.xml
 /phpunit*.xml
 /.phpunit.*.cache
 
+app/Config/Email.php
+app/Config/Routes.php
+app/Controllers/BaseController.php
+app/Controllers/PustakawanController.php
+app/Database/Migrations/2022-09-30-080000_Pustakawan.php
+app/Database/Migrations/2022-10-01-075558_Koleksi.php
+app/Database/Migrations/2022-10-20-073605_Transaksi.php
+app/Database/Seeds/AnggotaSeeder.php
+app/Database/Seeds/Koleksiseeder.php
+app/Database/Seeds/PemesananSeeder.php
+app/Database/Seeds/PustakawanSeeder.php
+app/Models/AnggotaModel.php
+app/Models/KlasifikasiSeeder.php
+app/Models/PenerbitModel.php
+app/Models/PustakawanModel.php
+app/Views/login.php
+app/Views/lupa_password.php
+app/Views/Pustakawan/table.php
