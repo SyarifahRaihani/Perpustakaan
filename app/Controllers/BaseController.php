@@ -40,6 +40,7 @@ abstract class BaseController extends Controller
 
     /**
      * @var Session
+
      */
     protected $session;
 

@@ -15,8 +15,6 @@ class StokKoleksiSeeder extends Seeder
             'status_tersedia'   => 'A',
             #'anggota_id'       => ,
             #'pustakawan_id'    => ,
-            
-
         ]);
         echo "hasil insert $r";
     }
