@@ -139,6 +139,7 @@
             $.get(`${baseurl}/anggota/${id}`).done((e)=>{
                 $('input[name=id]').val(e.id);
                 $('input[name=nama_depan]').val(e.nama_depan);
+                $('input[name=nama_belakang]').val(e.nama_belakang);
                 $('input[name=nama_belakang]').val(e.namaA-A)
             });
         });
