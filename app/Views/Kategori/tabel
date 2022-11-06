@@ -9,20 +9,19 @@
     <thead>
         <tr>
             <th>no</th>
+            <th>kode</th>
             <th>id</th>
             <th>nama</th>
-            <th>kode</th>
-            <th>aksi</th>
         </tr>
     </thead>
 </table>
 <script>
     $(document).ready(function() {
-        $('table#table_Bahasa').Datatable({
+        $('table#table_Kategori').Datatable({
             processing: true,
             serverSide: true,
             ajax: {
-                url: "<?= base_url('Bahasa/all')?>",
+                url: "<?= base_url('Kategori/all')?>",
                 method: 'GET'
             },
             columns: [{
@@ -31,10 +30,10 @@
                 searc
             },
             {
-                data: 'id'
+                data: 'kode'
             },
             {
-                data: 'Kode'
+                data: 'id'
             },
             {
                 data: 'nama'
