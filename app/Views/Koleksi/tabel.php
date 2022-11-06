@@ -5,28 +5,32 @@
 <script src="https://cdn.jsdelivr.net/gh/agoenxz2186/submitAjax@develop/submit_ajax.js"></script>
 <link href="//cdn.datatables.net/1.12.1/css/jquery.dataTables.min.css" rel="stylesheet">
 <script src="//cdn.datatables.net/1.12.1/js/jquery.dataTables.min.js"></script>
-<table id='table-koleksi' class="database table-bordered">
-    <thead>
-        <tr>
-            <th>No</th>
-            <th>judul</th>
-            <th>jilid</th>
-            <th>edisi</th>
-            <th>penerbit_id</th>
-            <th>penulis</th>
-            <th>thn_terbit</th>
-            <th>klasifikasi_id</th>
-            <th>juml_halaman</th>
-            <th>isbn</th>
-            <th>bahasa_id</th>
-            <th>stok</th>
-            <th>eksemplar</th>
-            <th>kategori_id</th>
-            <th>pustakawan_id</th>
-            <th>aksi</th>
-        </tr>
-    </thead>
-</table>
+
+<div class="container">
+    <button class="float-end btn btn-primary" id="btn-nanbah">Tambah</button>
+    <table id='table-koleksi' class="database table-bordered">
+        <thead>
+            <tr>
+                <th>No</th>
+                <th>judul</th>
+                <th>jilid</th>
+                <th>edisi</th>
+                <th>penerbit_id</th>
+                <th>penulis</th>
+                <th>thn_terbit</th>
+                <th>klasifikasi_id</th>
+                <th>juml_halaman</th>
+                <th>isbn</th>
+                <th>bahasa_id</th>
+                <th>stok</th>
+                <th>eksemplar</th>
+                <th>kategori_id</th>
+                <th>pustakawan_id</th>
+                <th>aksi</th>
+            </tr>
+        </thead>
+    </table>
+</div>
 
 <script>
     $(document).ready(function() {

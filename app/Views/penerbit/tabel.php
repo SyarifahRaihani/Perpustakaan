@@ -5,18 +5,21 @@
 <script src="https://cdn.jsdelivr.net/gh/agoenxz2186/submitAjax@develop/submit_ajax.js"></script>
 <link href="//cdn.datatables.net/1.12.1/css/jquery.dataTables.min.css" rel="stylesheet">
 <script src="//cdn.datatables.net/1.12.1/js/jquery.dataTables.min.js"></script>
-<table id='table-Penerbit' class="database table-bordered">
-    <thead>
-        <tr>
-            <th>No</th>
-            <th>nama</th>
-            <th>kota</th>
-            <th>negara</th>
-            <th>aksi</th>
-        </tr>
-    </thead>
-</table>
 
+<div class="container">
+    <button class="float-end btn btn-primary" id="btn-nanbah">Tambah</button>
+    <table id='table-Penerbit' class="database table-bordered">
+        <thead>
+            <tr>
+                <th>No</th>
+                <th>nama</th>
+                <th>kota</th>
+                <th>negara</th>
+                <th>aksi</th>
+            </tr>
+        </thead>
+    </table>
+</div>
 <script>
     $(document).ready(function() {
         $('table#table_penerbit').DataTable({
