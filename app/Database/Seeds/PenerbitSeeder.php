@@ -11,7 +11,7 @@ class PenerbitSeeder extends Seeder
     {
         $r = (int)(new PenerbitModel())->insert([
             'nama'   => 'SalehGaming',
-            'kota'   => 'Pontianak',
+            'kota'   => 'Pontianak-',
             'negara' => 'Indonesia',
         ]);
         echo "hasil insert $r";

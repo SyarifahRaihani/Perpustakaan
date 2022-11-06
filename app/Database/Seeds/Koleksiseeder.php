@@ -17,12 +17,11 @@ class KoleksiSeeder extends Seeder
             'penulis'           => 'Saleh',
             'thn_terbit'      => '2020',
             #'klasifikasi_id'    => '',
-            #'jenis_id'          => ,
             'juml_halaman'      => '200',
             #'isbn'              => ,
             #'bahasa_id'         => ,
             'stok'              => '100',
-            'eksempler'         => '100',
+            'eksemplar'         => '100',
             #'kategori_id'       => ,
             #'pustakawan_id'     => ,
 

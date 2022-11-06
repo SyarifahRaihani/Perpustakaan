@@ -2,6 +2,9 @@
 
 namespace Config;
 
+use App\Controllers\KoleksiController;
+use CodeIgniter\Router\RouteCollection;
+
 // Create a new instance of our RouteCollection class.
 $routes = Services::routes();
 
@@ -37,6 +40,23 @@ $routes->set404Override();
 // route since we don't have to scan directories.
 $routes->get('/', 'Home::index');
 
+$routes->group('koleksi', function (RouteCollection $routes) {
+    $routes->get('/', 'KoleksiController::index');
+    $routes->post('/', 'KoleksiController::store');
+    $routes->patch('/', 'KoleksiController::update');
+    $routes->delete('/', 'KoleksiController::delete');
+    $routes->get('(:num)', 'KoleksiController::show/$1');
+    $routes->get('all', 'KoleksiController::all');
+});
+
+$routes->group('penerbit', function (RouteCollection $routes) {
+    $routes->get('/', 'PenerbitController::index');
+    $routes->post('/', 'PenerbitController::store');
+    $routes->patch('/', 'PenerbitController::update');
+    $routes->delete('/', 'PenerbitController::delete');
+    $routes->get('(:num)', 'PenerbitController::show/$1');
+    $routes->get('all', 'PenerbitController::all');
+});
 /*
  * --------------------------------------------------------------------
  * Additional Routing
