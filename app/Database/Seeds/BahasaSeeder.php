@@ -2,6 +2,7 @@
 
 namespace App\Database\Seeds;
 
+Use App\Models\BahasaModel;
 use CodeIgniter\Database\Seeder;
 
 class BahasaSeeder extends Seeder
@@ -9,10 +10,9 @@ class BahasaSeeder extends Seeder
     public function run()
     {
         $id = (new BahasaModel())->insert([
-            'nama' => 'Be',
-            'gender' => 'L',
-            'email' => 'dioadika6@gmail.com'
-            'sandi' => password_hash('123', PASSWORD_BCRYPT)
+            'kode' => 'id',
+            'nama' => 'Indo',
+            
         ]);
         echo "hasil id = $id";
     }

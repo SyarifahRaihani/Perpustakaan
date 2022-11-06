@@ -3,18 +3,19 @@
 namespace App\Controllers;
 
 use App\Controllers\BaseController;
+use App\Models\BahasaModel;
 
 class BahasaController extends BaseController
 {
-    public function login()
-    {
-        $email      = $this->request->getPost('email');
-        $password   = $this->request->getPost('sandi');
+    public function index(){
+        return view('Bahasa/table');
+    }
+    public function all(){
+        $spm = new BahasaModel();
+        $spm->select('id,kode,nama,');
 
-        $pengguna   = (new PenggunaModel())->where('email', $email)->first();
-
-        if($pengguna == null){
-            return $this->response->setJSON(['message'='Email tidak terdaftar'])
-        }
+        return (new ($spm))
+        ->setFieldFilter(['id,kode,nama'])
+        ->draw();
     }
 }

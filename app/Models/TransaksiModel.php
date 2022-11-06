@@ -1,14 +1,13 @@
--- Active: 1663834728514@@127.0.0.1@3306@db_baru2
 <?php
 
 namespace App\Models;
 
 use CodeIgniter\Model;
 
-class BahasaModel extends Model
+class TransaksiModel extends Model
 {
     protected $DBGroup          = 'default';
-    protected $table            = 'bahasa';
+    protected $table            = 'transaksi';
     protected $primaryKey       = 'id';
     protected $useAutoIncrement = true;
     protected $insertID         = 0;
