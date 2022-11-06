@@ -1,16 +1,11 @@
-<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" 
-            rel="stylesheet"  crossorigin="anonymous">
-        <script src="https://cdn.jsdelivr.com/jquery-3.6.1.min.js" 
-            crossorigin="anonymous"></script>
-        <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js" 
-            crossorigin="anonymous"></script>
-        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js"  
-            crossorigin="anonymous"></script>
-            <script src="https://cdn.jsdelivr.net/gh/agoenxz2186/submitAjax@develop/submit_ajax.js" 
-            crossorigin="anonymous"></script>
-        <link href="//cdn.datatables.net/1.12.1/css/jquery.dataTables.min.css" rel="stylesheet"> 
-        <script src="//cdn.datatables.net/1.12.1/js/jquery.dataTables.min.js"></script>
-        
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" crossorigin="anonymous">
+<script src="https://code.jquery.com/jquery-3.6.1.min.js" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/gh/agoenxz2186/submitAjax@develop/submit_ajax.js"></script>
+<link href="//cdn.datatables.net/1.12.1/css/jquery.dataTables.min.css" rel="stylesheet">
+<script src="//cdn.datatables.net/1.12.1/js/jquery.dataTables.min.js"></script>
+
 
 
 <div class="container">
@@ -25,7 +20,6 @@
                 <th>Tanggal Lahir</th>
                 <th>Level</th>
                 <th>Email</th>
-                <th>Sandi</th>
                 <th>No HP</th>
                 <th>Alamat</th>
                 <th>Kota</th>
@@ -39,14 +33,15 @@
 <div id="modalForm" class="modal">
     <div class="modal-dialog">
         <div class="modal-content">
-            <div class="modal-header"></div>
+            <div class="modal-header">
                 <h5 class="modal-title">Form Pustawakan</h5>
                 <button class="btn-close" data-bs-dismiss="modal"></button>
-            <div class="modal-body"></div>
+            </div>
+            <div class="modal-body">
                 <form id="formPustakawan" method="post" action="<?=base_url('pustakawan')?>">
                 <input type="hidden" name="id" />
                 <div class="mb-3">
-                    <label class="form-label">Nama Lengkap</labct type="text" name="nama_lengkap" class="form-control" />
+                    <label class="form-label">Nama Lengkap </label>
                     <input type="text" name="nama_lengkap" class="form-control" />
                 </div>
                 <div class="mb-3">
@@ -93,6 +88,7 @@
                     <input type="text" name="token_reset">
                 </div>
                 </form>
+            </div>
             <div class="modal-footer">
                 <button class="btn btn-success" id="btn-kirim">Kirim</button>
             </div>
@@ -101,30 +97,39 @@
 </div>
 
 <script>
-    $(document).ready(function(){
+    $(document).ready(function(){  
         $('form#formPustakawan').submitAjax({
             pre:()=>{
-
+                $('button#btn-kirim').hide();
             },
-            pascal:()=>{
-
-            },
-            success:(response, status)=>{
-
-            },
-            error: (xhr, status)=>{
-                
-            }
+        pasca:()=>{
+            $('button#btn-kirim').show();
+        },
+        success:(response, status)=>{
+            $("modalForm").modal('hide');
+            $("table#table-pelanggan").DataTable().ajax.reload();
+        },
+        error: (xhr, status)=>{
+            alert('Maaf, data pustakawan gagal direkam');
+        }
         })
+
         $('button#btn-kirim').on('click', function(){
-            
             $('form#formPustakawan').submit();
         });
 
-        $('button#btn-tambah').on('click', function(){
-            $('modalForm').modal('show');
-            $('form#formPustakawan').trigger('reset');
-        });
+       $('button#btn-tambah').on('click', function(){
+           $('#modalForm').modal('show');
+           $('form#formPustakawan').trigger('reset');
+       });
+
+        $('table#table-pelanggan').on('click', '.btn-edit', function(){
+            let id = $(this).data('id');
+            let baseurl = "<?=base_url()?>";
+            $.get(`${baseurl}/pustakawan/${id}`).done((e)=>{
+
+            });
+        })
         
         $('table#table-pelanggan').DataTable({
             processing: true,
@@ -135,7 +140,7 @@
             },
             colums:[
                 { data: 'id', sortable:false, searchable:false,
-                  render: (data,type,row,meta)=>{
+                  render: (data, type, row, meta)=>{
                     return meta.settings._iDisplayStart + meta.row + 1;
                   }
                 },
@@ -161,12 +166,11 @@
                     return data;
                     }
                 },
-                { data: 'email'},
-                { data: 'sandi'},
-                { data: 'nohp'},
-                { data: 'alamat'},
-                { data: 'kota'},
-                { data: 'token_reset'},
+                { data: 'email' },
+                { data: 'nohp' },
+                { data: 'alamat' },
+                { data: 'kota' },
+                { data: 'token_reset' },
                 { data: 'id', 
                   render: (data,type, meta, row)=>{
                     var btnEdit = `<button class='btn-edit' data-id='$(data)'>Edit</button>`;
@@ -177,4 +181,5 @@
             ]
         });
     });
+    
 </script>

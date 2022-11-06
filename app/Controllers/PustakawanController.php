@@ -92,10 +92,10 @@ class PustakawanController extends BaseController
 
     public function all(){
         $pm = new PustakawanModel();
-        $pm->select('id, nama_lengkap, gender, tgl_lahir, level, email, sandi, nohp, alamat, kota, token_reset');
+        $pm->select('id, nama_lengkap, gender, tgl_lahir, level, email, nohp, alamat, kota, token_reset');
 
         return (new Datatable( $pm ))
-                ->setFieldFilter(['nama_lengkap', 'gender', 'tgl_lahir', 'level', 'email', 'sandi', 'nohp', 'alamat', 'kota', 'token_reset'])
+                ->setFieldFilter(['nama_lengkap', 'gender', 'tgl_lahir', 'level', 'email', 'nohp', 'alamat', 'kota', 'token_reset'])
                 ->draw();
     }
 
