@@ -5,9 +5,10 @@ namespace App\Controllers;
 use Agoenxz21\Datatables\Datatable;
 use App\Controllers\BaseController;
 use App\Models\PemesananModel;
+use CodeIgniter\Email\Email;
 use CodeIgniter\Exceptions\PageNotFoundException;
-use JetBrains\PhpStorm\Internal\ReturnTypeContract;
-use PhpParser\Node\Stmt\Return_;
+use CodeIgniter\HTTP\Message;
+
 
 class PemesananController extends BaseController
 {
@@ -23,7 +24,7 @@ class PemesananController extends BaseController
                 ->draw();
     }
     public function show($id){
-        $pm = (new PemesananModel())->where('id, $id')->first();
+        $r = (new PemesananModel())->where('id, $id')->first();
         if($r == null)throw PageNotFoundException::forPageNotFound();
 
         return $this->response->setJSON($r);
@@ -50,7 +51,7 @@ class PemesananController extends BaseController
         $id     = (int)$this->request->getVar('id');
 
         if( $pm->find($id) == null )
-            throw PageNotFoundException::forMethodNotFound();
+            throw PageNotFoundException::forPageNotFound();
             
         $hasil  = $pm->update($id, [
             'tgl_awal'  => $this->request->getVar('tgl_awal'),
