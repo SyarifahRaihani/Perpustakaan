@@ -2,13 +2,13 @@
 
 namespace App\Controllers;
 
-use App\Controllers\Datatable;
+
+use Agoenxz21\Datatables\Datatable;
 use App\Controllers\BaseController;
-use App\Database\Migrations\Klasifikasi;
 use App\Models\KlasifikasiModel;
+use CodeIgniter\Email\Email;
 use CodeIgniter\Exceptions\PageNotFoundException;
-use JetBrains\PhpStorm\Internal\ReturnTypeContract;
-use PhpParser\Node\Stmt\Return_;
+use CodeIgniter\HTTP\Message;
 
 class KlasifikasiController extends BaseController
 {
@@ -47,7 +47,7 @@ class KlasifikasiController extends BaseController
         $id     =(int)$this->request->getVar('id');
 
         if( $pm->find($id) == null)
-            throw PageNotFoundException::forControllerNotFound();
+            throw PageNotFoundException::forPageNotFound();
             
          $hasil = $pm->update($id, [
             'ddc'   => $this->request->getVar('ddc'),

@@ -10,17 +10,21 @@
         <link href="//cdn.datatables.net/1.12.1/css/jquery.dataTables.min.css" rel="stylesheet">
         <script src="//cdn.datatables.net/1.12.1/js/jquery.dataTables.min.js"></script>
        
-        
-<table id='table-klasifikasi' class="database table-bordered">
-    <thead>
-        <tr>
-            <th>No</th>
-            <th>Ddc</th>
-            <th>Nama</th>
-            <th>Aksi</th>
-        </tr>
-    </thead>
-</table>
+    
+<div class="container">
+    <button class="'float-end btn btn-sm btn-primary" id="btn-tambah">Tambah</button>
+
+    <table id='table-klasifikasi' class="datatable table-bordered">
+        <thead>
+            <tr>
+                <th>No</th>
+                <th>Ddc</th>
+                <th>Nama</th>
+                <th>Aksi</th>
+            </tr>
+        </thead>
+    </table>
+</div>
 
 <script>
     $(document).ready(function(){
@@ -32,7 +36,7 @@
                 method: 'GET'
             },
             columns:[
-                { data: 'id', sortable:false, searc},
+                { data: 'id',},
                 { data: 'ddc'},
                 { data: 'nama'},
                 { data: 'id'}

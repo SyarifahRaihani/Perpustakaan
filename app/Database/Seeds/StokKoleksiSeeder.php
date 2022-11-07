@@ -13,8 +13,8 @@ class StokKoleksiSeeder extends Seeder
             'koleksi_id'        => '10',
             'nomor'             => '10',
             'status_tersedia'   => 'A',
-            #'anggota_id'       => ,
-            #'pustakawan_id'    => ,
+            'anggota_id'       => 1,
+            'pustakawan_id'    => 1,
         ]);
         echo "hasil insert $r";
     }

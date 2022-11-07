@@ -2,10 +2,12 @@
 
 namespace App\Controllers;
 
+use Agoenxz21\Datatables\Datatable;
 use App\Controllers\BaseController;
-use App\Database\Migrations\StokKoleksi;
 use App\Models\StokKoleksiModel;
+use CodeIgniter\Email\Email;
 use CodeIgniter\Exceptions\PageNotFoundException;
+use CodeIgniter\HTTP\Message;
 
 class StokKoleksiController extends BaseController
 {
@@ -21,10 +23,10 @@ class StokKoleksiController extends BaseController
                 ->draw();
     }
     public function show($id){
-        $pm = (new StokKoleksiModel())->where('id', $id)->first();
+        $r = (new StokKoleksiModel())->where('id', $id)->first();
         if($r == null)throw PageNotFoundException::forPageNotFound();
 
-        return $this->response->setJSON($r):
+        return $this->response->setJSON($r);
     }
     public function store(){
         $pm     = new StokKoleksiModel();
@@ -43,11 +45,11 @@ class StokKoleksiController extends BaseController
                     ->setStatusCode( intval($id) > 0 ? 200 : 406);
     }
     public function update(){
-        $pm     = new PemesananModel();
+        $pm     =new StokKoleksiModel();
         $id     = (int)$this->request->getVar('id');
 
         if( $pm->find($id) == null )
-            throw PageNotFoundException::forMethodNotFound();
+            throw PageNotFoundException::forPageNotFound();
             
         $hasil  = $pm->update($id, [
             'koleksi_id'  => $this->request->getVar('koleksi_id'),
