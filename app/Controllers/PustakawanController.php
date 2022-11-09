@@ -87,7 +87,7 @@ class PustakawanController extends BaseController
     }
 
     public function index(){
-        return view('Pustakawan1/table');
+        return view('Pustakawan/table');
     }
 
     public function all(){
@@ -132,7 +132,8 @@ class PustakawanController extends BaseController
 
         if( $pm->find($id) == null )
             throw PageNotFoundException::forPageNotFound();
-            $hasil  = $pm->update($id, [
+
+        $hasil  = $pm->update($id, [
             'nama_lengkap'      => $this->request->getVar('nama_lengkap'),
             'gender'            => $this->request->getVar('gender'),
             'tgl_lahir'         => $this->request->getVar('tgl_lahir'),
