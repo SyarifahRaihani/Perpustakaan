@@ -10,7 +10,7 @@
 <div class="container">
     <button class="float-end btn btn-sm btn-primary" id="btn-tambah">Tambah</button>
 
-    <table id='table-pelanggan' class="datatable table table-bordered">
+    <table id='tabel-pelanggan' class="datatable table table-bordered">
         <thead>
             <tr>
                 <th>No</th>
@@ -40,8 +40,9 @@
                 <button class="btn-close" data-bs-dismiss="modal"></button>
             </div>
             <div class="modal-body">
-                <form id="formAnggota" method="post" action="<?=base_url('anggota')?>">
+                <form id="formAnggota" method="post" action="<?=base_url('anggota')?>" >
                     <input type="hidden" name="id" />
+                    <input type="hidden" name="_method" />
                     <div class="mb-3">
                         <label class="form-label">Nama Depan</label>
                         <input type="text" name="nama_depan" class="form-control" />
@@ -76,6 +77,7 @@
                     </div>
                     <div class="mb-3">
                         <label class="form-label">Foto</label>
+                        <input type="file" name="foto" class="form-control" />
                     </div>
                     <div class="mb-3">
                         <label class="form-label">Tanggal Daftar</label>
@@ -117,10 +119,10 @@
             },
             success:(response, status)=>{
                 $("#modalForm").modal('hide');
-                $("table#table-pelanggan").DataTable().ajax.reload();
+                $("table#tabel-pelanggan").DataTable().ajax.reload();
             },
             error:(xhr, status)=>{
-                alert('Maaf, data pengguna gagal direkam');
+                alert('Maaf, data anggota gagal direkam');
             }
         });
 
@@ -131,20 +133,46 @@
         $('button#btn-tambah').on('click', function(){
             $('#modalForm').modal('show');
             $('form#formAnggota').trigger('reset');
+            $('input[name=_method]').val('');
         });
 
-        $('table#table-pelanggan').on('click', '.btn-edit',  function(){
+        $('table#tabel-pelanggan').on('click', '.btn-edit',  function(){
             let id = $(this).data('id');
             let baseurl = "<?=base_url()?>";
             $.get(`${baseurl}/anggota/${id}`).done((e)=>{
                 $('input[name=id]').val(e.id);
                 $('input[name=nama_depan]').val(e.nama_depan);
                 $('input[name=nama_belakang]').val(e.nama_belakang);
-                $('input[name=nama_belakang]').val(e.namaA-A)
+                $('input[name=email]').val(e.email);
+                $('input[name=nohp]').val(e.nohp);
+                $('input[name=alamat]').val(e.alamat);
+                $('input[name=kota]').val(e.kota);
+                $('input[name=gender]').val(e.gender);
+                $('input[name=foto]').val(e.foto);
+                $('input[name=tgl_daftar]').val(e.tgl_daftar);
+                $('input[name=status_aktif]').val(e.status_aktif);
+                $('input[name=berlaku_awal]').val(e.berlaku_awal);
+                $('input[name=berlaku_akhir]').val(e.berlaku_akhir);
+                $('#modalForm').modal('show');
+                $('input[name=_method]').val('patch');
+
             });
         });
-        
-        $('table#table-pelanggan').DataTable({
+
+        $('table#tabel-pelanggan').on('click', '.btn-hapus', function(){
+            let konfirmasi = confirm('Data Anggota akan dihapus, mau dilanjutkan?');
+            
+            if(konfirmasi === true){
+                let _id = $(this).data('id');
+                let baseurl = "<?=base_url()?>";
+
+                $.post(`${baseurl}/anggota`, {id:_id, _method:'delete'}).done(function(e){
+                    $('table#tabel-pelanggan').DataTable().ajax.reload();
+                });
+            }
+        });
+         
+        $('table#tabel-pelanggan').DataTable({
             processing: true,
             serverSide: true,
             ajax:{
@@ -153,46 +181,38 @@
             },
             columns:[
                 { data: 'id', sortable:false, searchable:false,
-                  render: (data,type,row,meta)=>{
+                    render: (data,type,row,meta)=>{
                         return meta.settings._iDisplayStart + meta.row + 1;
                     }
                 },
-                { data: 'nama_depan'},
-                { data: 'nama_belakang'},
+                { data: 'nama_depan' },
+                { data: 'nama_belakang' },
                 { data: 'email'},
                 { data: 'nohp'},
                 { data: 'alamat'},
                 { data: 'kota'},
                 { data: 'gender',
-                    render: (data, type, meta, row)=>{
-                    if(data === 'L'){
-                        return 'Laki-Laki';
-                    }else if( data === 'P'){
-                        return 'Perempuan';
+                    render:(data, type, meta, row)=>{
+                    if(data === 'L')
+                    return 'Laki-Laki';
+                    else if( data === 'P'){
+                        return 'Perempuan'
                     }
                     return data;
-                  }
-                },
-                { data: 'foto'},
-                { data: 'tgl_daftar'},
-                { data: 'status_aktif',
-                    render: (data, type, meta, row)=>{
-                        if(data === 'A'){
-                            return 'Aktif';
-                        }else if( data === 'N'){
-                            return 'Non Aktif';
-                        }
                     }
                 },
+                { data: 'foto', },
+                { data: 'tgl_daftar'},
+                { data: 'status_aktif'},
                 { data: 'berlaku_awal'},
                 { data: 'berlaku_akhir'},
                 { data: 'id',
                     render: (data,type, meta, row)=>{
-                    var btnEdit = `<button class='btn-edit' data-id='$(data)'>Edit</button>`;
-                    var btnHapus = `<button class='btn-Hapus' data-id='$(data)'>Hapus</button>`;
+                    var btnEdit = `<button class='btn-edit btn-warning' data-id='${data}'>Edit</button>`;
+                    var btnHapus = `<button class='btn-hapus btn-danger' data-id='${data}'>Hapus</button>`;
                     return btnEdit + btnHapus;
-                  }
-                }
+                    }
+                },
             ]
         });
     });

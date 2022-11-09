@@ -16,7 +16,7 @@ class Koleksi extends Migration
             'edisi'         =>[ 'type' => 'varchar', 'constraint'=> 80 ],
             'penerbit_id'   =>[ 'type' => 'int', 'constraint' => 10, 'unsigned'=>true, ],
             'penulis'       =>[ 'type' => 'varchar', 'constraint'=> 155 ],
-            'thn_terbit'     =>[ 'type' => 'year', 'constraint'=>4 ],
+            'thn_terbit'    =>[ 'type' => 'year', 'constraint'=>4 ],
             'klasifikasi_id'=>[ 'type' => 'int', 'constraint' => 10, 'unsigned'=>true,  ],
             'juml_halaman'  =>[ 'type' => 'varchar', 'constraint'=> 10 ],
             'isbn'          =>[ 'type' => 'varchar', 'constraint'=> 20 ],

@@ -12,13 +12,13 @@
        
     
 <div class="container">
-    <button class="'float-end btn btn-sm btn-primary" id="btn-tambah">Tambah</button>
+    <button class="float-end btn btn-sm btn-primary" id="btn-tambah">Tambah</button>
 
-    <table id='table-klasifikasi' class="datatable table-bordered">
+    <table id='table-pelanggan' class="datatable table-bordered">
         <thead>
             <tr>
                 <th>No</th>
-                <th>Ddc</th>
+                <th>DDC</th>
                 <th>Nama</th>
                 <th>Aksi</th>
             </tr>
@@ -26,9 +26,88 @@
     </table>
 </div>
 
+<div id="modalForm" class="modal">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Form Klasifikasi</h5>
+                <button class="btn-close" data-bs-dismiss="modal"></button>
+            </div>
+            <div class="modal-body">
+                <form id="formKlasifikasi" method="post" action="<?=base_url('klasifikasi')?>">
+                    <input type="hidden" name="id" />
+                    <input type="hidden" name="_method" />
+                    <div class="mb-3">
+                        <label class="form-label">DDC</label>
+                        <input type="text" name="ddc" class="form-control" />
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label">Nama</label>
+                        <input type="text" name="nama" class="form-control" />
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-success" id="btn-kirim">Kirim</button>
+            </div>
+        </div>
+    </div>
+</div>
+
 <script>
     $(document).ready(function(){
-        $('table#table-klasifikasi').DataTable({
+        $('form#formKlasifikasi').submitAjax({
+            pre:()=>{
+                $('button#btn-kirim').hide();
+            },
+            pasca:()=>{
+                $('button#btn-kirim').show();
+            },
+            success:(response, status)=>{
+                $("modalForm").modal('hide');
+                $("table#table-pelanggan").DataTable().ajax.reload();
+            },
+            error: (xhr, status)=>{
+                alert('Maaf, data Klasifikasi gagal direkam');
+            }
+        });
+
+        $('button#btn-kirim').on('click', function(){
+            $('form#formKlasifikasi').submit();
+        });
+
+        $('button#btn-tambah').on('click', function(){
+            $('#modalForm').modal('show');
+            $('form#formKlasifikasi').trigger('reset');
+            $('input[name=_method]').val('');
+        });
+
+        $('table#table-pelanggan').on('click', '.btn-edit', function(){
+            let id = $(this).data('id');
+            let baseurl = "<?=base_url()?>";
+            $.get(`${baseurl}/klasifikasi/${id}`).done((e)=>{
+                $('input[name=id]').val(e.id);
+                $('input[name=ddc]').val(e.ddc);
+                $('input[name=nama]').val(e.nama);
+                $('#modalForm').modal('show');
+                $('input[name=_method]').val('patch');
+            });
+        });
+
+        $('table#table-pelanggan').on('click', '.btn-hapus', function(){
+            let konfirmasi = confirm('Data Klasifikasi akan dihapus, mau dilanjutkan?');
+
+            if(konfirmasi === true){
+                let _id = $(this).data('id');
+                let baseurl = "<?=base_url()?>";
+
+                $.post(`${baseurl}/klasifikasi`, {id:_id, _method:'delete'}).done(function(e){
+                    $('table#table-pelanggan').DataTable().ajax.reload();
+                })
+            }
+        });
+
+        $('table#table-pelanggan').DataTable({
             processing: true,
             serverSide: true,
             ajax:{
@@ -36,10 +115,20 @@
                 method: 'GET'
             },
             columns:[
-                { data: 'id',},
-                { data: 'ddc'},
-                { data: 'nama'},
-                { data: 'id'}
+                { data: 'id', sortable:false, searchable:false,
+                    render: (data,type,row,meta)=>{
+                        return meta.settings._iDisplayStart + meta.row + 1;
+                    }
+                },
+                { data: 'ddc' },
+                { data: 'nama' },
+                { data: 'id',
+                    render: (data,type, meta, row)=>{
+                    var btnEdit = `<button class='btn-edit btn-warning' data-id='${data}'>Edit</button>`;
+                    var btnHapus = `<button class='btn-hapus btn-danger' data-id='${data}'>Hapus</button>`;
+                    return btnEdit + btnHapus;
+                    }
+                },
             ]
         });
     });
