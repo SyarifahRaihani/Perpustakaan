@@ -192,7 +192,7 @@
                     { data: 'nohp'},
                     { data: 'alamat'},
                     { data: 'kota'},
-                    { data: 'token_reset'},
+                    { data: 'token_reset' },
                     { data: 'id',
                         render: (data,type, meta, row)=>{
                         var btnEdit = `<button class='btn-edit btn-warning' data-id='${data}'>Edit</button>`;
