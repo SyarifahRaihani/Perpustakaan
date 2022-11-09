@@ -48,16 +48,7 @@ $routes->group('login', function(RouteCollection $routes){
     $routes->patch('/', 'PustawakanController::lupaPassword');
 });
 
-$routes->group('pustakawan', function(RouteCollection $routes){
-    $routes->get('/', 'PustakawanController::index');
-    $routes->post('/', 'PustakawanController::store');
-    $routes->patch('/', 'PustakawanController::update');
-    $routes->delete('/', 'PustakawanController::delete');
-    $routes->get('(:num)', 'PustakawanController::show/$1');
-    $routes->get('all', 'PustakawanController::all');
-});
-
-$routes->group('klasifikasi', function(RouteCollection $routes){
+$routes->group('klasifikasi', ['filter'=>'otentikasi'], function(RouteCollection $routes){
     $routes->get('/', 'KlasifikasiController::index');
     $routes->post('/', 'KlasifikasiController::store');
     $routes->patch('/', 'KlasifikasiController::update');
@@ -66,7 +57,25 @@ $routes->group('klasifikasi', function(RouteCollection $routes){
     $routes->get('all', 'KlasifikasiController::all');
 });
 
-$routes->group('penerbit', function(RouteCollection $routes){
+$routes->group('bahasa', ['filter'=>'otentikasi'], function(RouteCollection $routes){
+    $routes->get('/', 'BahasaController::index');
+    $routes->post('/', 'BahasaController::store');
+    $routes->patch('/', 'BahasaController::update');
+    $routes->delete('/', 'BahasaController::delete');
+    $routes->get('(:num)', 'BahasaController::show/$1');
+    $routes->get('all', 'BahasaController::all');
+});
+
+$routes->group('kategori', ['filter'=>'otentikasi'], function(RouteCollection $routes){
+    $routes->get('/', 'KategoriController::index');
+    $routes->post('/', 'KategoriController::store');
+    $routes->patch('/', 'KategoriController::update');
+    $routes->delete('/', 'KategoriController::delete');
+    $routes->get('(:num)', 'KategoriController::show/$1');
+    $routes->get('all', 'KategoriController::all');
+});
+
+$routes->group('penerbit', ['filter'=>'otentikasi'], function(RouteCollection $routes){
     $routes->get('/', 'PenerbitController::index');
     $routes->post('/', 'PenerbitController::store');
     $routes->patch('/', 'PenerbitController::update');
@@ -75,22 +84,58 @@ $routes->group('penerbit', function(RouteCollection $routes){
     $routes->get('all', 'PenerbitController::all');
 });
 
-$routes->group('penerbit', function(RouteCollection $routes){
-    $routes->get('/', 'PenerbitController::index');
-    $routes->post('/', 'PenerbitController::store');
-    $routes->patch('/', 'PenerbitController::update');
-    $routes->delete('/', 'PenerbitController::delete');
-    $routes->get('(:num)', 'PenerbitController::show/$1');
-    $routes->get('all', 'PenerbitController::all');
+$routes->group('pustakawan', ['filter'=>'otentikasi'], function(RouteCollection $routes){
+    $routes->get('/', 'PustakawanController::index');
+    $routes->post('/', 'PustakawanController::store');
+    $routes->patch('/', 'PustakawanController::update');
+    $routes->delete('/', 'PustakawanController::delete');
+    $routes->get('(:num)', 'PustakawanController::show/$1');
+    $routes->get('all', 'PustakawanController::all');
 });
 
-$routes->group('stokkoleksi', function(RouteCollection $routes){
+$routes->group('koleksi', ['filter'=>'otentikasi'], function(RouteCollection $routes){
+    $routes->get('/', 'KoleksiController::index');
+    $routes->post('/', 'KoleksiController::store');
+    $routes->patch('/', 'KoleksiController::update');
+    $routes->delete('/', 'KoleksiController::delete');
+    $routes->get('(:num)', 'KoleksiController::show/$1');
+    $routes->get('all', 'KoleksiController::all');
+});
+
+$routes->group('anggota', ['filter'=>'otentikasi'], function(RouteCollection $routes){
+    $routes->get('/', 'AnggotaController::index');
+    $routes->post('/', 'AnggotaController::store');
+    $routes->patch('/', 'AnggotaController::update');
+    $routes->delete('/', 'AnggotaController::delete');
+    $routes->get('(:num)', 'AnggotaController::show/$1');
+    $routes->get('all', 'AnggotaController::all');
+});
+
+$routes->group('stokkoleksi', ['filter'=>'otentikasi'], function(RouteCollection $routes){
     $routes->get('/', 'StokKoleksiController::index');
     $routes->post('/', 'StokKoleksiController::store');
     $routes->patch('/', 'StokKoleksiController::update');
     $routes->delete('/', 'StokKoleksiController::delete');
     $routes->get('(:num)', 'StokKoleksiController::show/$1');
     $routes->get('all', 'StokKoleksiController::all');
+});
+
+$routes->group('pemesanan', ['filter'=>'otentikasi'], function(RouteCollection $routes){
+    $routes->get('/', 'PemesananController::index');
+    $routes->post('/', 'PemesananController::store');
+    $routes->patch('/', 'PemesananController::update');
+    $routes->delete('/', 'PemesananController::delete');
+    $routes->get('(:num)', 'PemesananController::show/$1');
+    $routes->get('all', 'PemesananController::all');
+});
+
+$routes->group('transaksi', ['filter'=>'otentikasi'], function(RouteCollection $routes){
+    $routes->get('/', 'TransaksiController::index');
+    $routes->post('/', 'TransaksiController::store');
+    $routes->patch('/', 'TransaksiController::update');
+    $routes->delete('/', 'TransaksiController::delete');
+    $routes->get('(:num)', 'TransaksiController::show/$1');
+    $routes->get('all', 'TransaksiController::all');
 });
 
 /*

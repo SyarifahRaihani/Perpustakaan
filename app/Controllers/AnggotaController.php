@@ -39,13 +39,13 @@ class AnggotaController extends BaseController
             'nama_depan'    => $this->request->getVar('nama_depan'),
             'nama_belakang' => $this->request->getVar('nama_belakang'),
             'email'         => $this->request->getVar('email'),
-            'nohp'         => $this->request->getVar('nohp'),
-            'alamat'         => $this->request->getVar('alamat'),
+            'nohp'          => $this->request->getVar('nohp'),
+            'alamat'        => $this->request->getVar('alamat'),
             'gender'        => $this->request->getVar('gender'),
-            'tgl_daftar'         => $this->request->getVar('tgl_daftar'),
-            'status_aktif'         => $this->request->getVar('status_aktif'),
-            'berlaku_awal'         => $this->request->getVar('berlaku_awal'),
-            'berlaku_akhir'         => $this->request->getVar('berlaku_akhir'),
+            'tgl_daftar'    => $this->request->getVar('tgl_daftar'),
+            'status_aktif'  => $this->request->getVar('status_aktif'),
+            'berlaku_awal'  => $this->request->getVar('berlaku_awal'),
+            'berlaku_akhir' => $this->request->getVar('berlaku_akhir'),
         ]);
         return $this->response->setJSON(['id' => $id])
                     ->setStatusCode( intval($id) > 0 ? 200 : 406 );

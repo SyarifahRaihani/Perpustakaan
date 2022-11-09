@@ -10,8 +10,8 @@ class Kategori extends Migration
     public function up()
     {
         $this->forge->addfield([
-            'id'    =>[ 'type' => 'int','constraint' => 10,'unsigned'=>true, 'auto_increment'=>true],
-            'nama'  =>[ 'type' => 'varchar','constraint' => 30,'null'=>false ]
+            'id'    =>[ 'type' => 'int','constraint' =>10, 'unsigned'=>true, 'auto_increment'=>true ],
+            'nama'  =>[ 'type' => 'varchar','constraint' => 30,'null'=>true ],
         ]);
         $this->forge->addPrimarykey('id');
         $this->forge->createTable('kategori');

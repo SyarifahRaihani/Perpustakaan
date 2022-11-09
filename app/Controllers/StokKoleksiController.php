@@ -16,10 +16,10 @@ class StokKoleksiController extends BaseController
     }
     public function all(){
         $pm =new StokKoleksiModel();
-        $pm->select('id, koleksi_id, nomor, status_tersedia, anggota_id, pustakawan_id, created_id, updated_at, deleted_at');
+        $pm->select('id, koleksi_id, nomor, status_tersedia, anggota_id, pustakawan_id, ');
 
         return (new Datatable( $pm ))
-                ->setFieldFilter(['koleksi_id', 'nomor', 'status_tersedia', 'anggota_id', 'pustakawan_id', 'created_id', 'updated_at', 'deleted_at'])
+                ->setFieldFilter(['koleksi_id', 'nomor', 'status_tersedia', 'anggota_id', 'pustakawan_id' ])
                 ->draw();
     }
     public function show($id){
@@ -32,14 +32,11 @@ class StokKoleksiController extends BaseController
         $pm     = new StokKoleksiModel();
 
         $id = $pm->insert([
-            'koleksi_id'  => $this->request->getVar('koleksi_id'),
-            'nomor'  => $this->request->getVar('nomor'),
-            'status_tersedia'  => $this->request->getVar('status_tersedia'),
-            'anggota_id'  => $this->request->getVar('anggota_id'),
-            'pustakawan'  => $this->request->getVar('pustakawan_id'),
-            'created_at'  => $this->request->getVar('created_at'),
-            'update_at'  => $this->request->getVar('updated_at'),
-            'deleted_at'  => $this->request->getVar('deleted_at'),
+            'koleksi_id'        => $this->request->getVar('koleksi_id'),
+            'nomor'             => $this->request->getVar('nomor'),
+            'status_tersedia'   => $this->request->getVar('status_tersedia'),
+            'anggota_id'        => $this->request->getVar('anggota_id'),
+            'pustakawan'        => $this->request->getVar('pustakawan_id'),
         ]);
         return $this->response->setJSON(['id => $id'])
                     ->setStatusCode( intval($id) > 0 ? 200 : 406);
@@ -52,14 +49,11 @@ class StokKoleksiController extends BaseController
             throw PageNotFoundException::forPageNotFound();
             
         $hasil  = $pm->update($id, [
-            'koleksi_id'  => $this->request->getVar('koleksi_id'),
-            'nomor'  => $this->request->getVar('nomor'),
-            'status_tersedia'  => $this->request->getVar('status_tersedia'),
-            'anggota_id'  => $this->request->getVar('anggota_id'),
-            'pustakawan_id'  => $this->request->getVar('pustakawan_id'),
-            'created_at'  => $this->request->getVar('created_at'),
-            'updated_at'  => $this->request->getVar('update_at'),
-            'deleted_at'  => $this->request->getVar('deleted_at'),
+            'koleksi_id'        => $this->request->getVar('koleksi_id'),
+            'nomor'             => $this->request->getVar('nomor'),
+            'status_tersedia'   => $this->request->getVar('status_tersedia'),
+            'anggota_id'        => $this->request->getVar('anggota_id'),
+            'pustakawan_id'     => $this->request->getVar('pustakawan_id'),
         ]);
         return $this->response->setJSON(['result'=>$hasil]);
         

@@ -13,8 +13,8 @@ class PemesananSeeder extends Seeder
 
             'tgl_awal'      => '2022-10-15',
             'tgl_akhir'     => '2022-10-30',
-            'koleksi_id'    => '1',
-            'anggota_id'    => '2',
+            'koleksi_id'    => 1,
+            'anggota_id'    => 1,
             'status_pesan'  => 'B',
         ]);
         

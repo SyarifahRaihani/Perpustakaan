@@ -13,15 +13,15 @@ use CodeIgniter\HTTP\Message;
 class KlasifikasiController extends BaseController
 {
     public function index(){
-        return view('klasifikasi/table');
+        return view('Klasifikasi/table');
     }
 
     public function all(){
         $pm = new KlasifikasiModel();
-        $pm->select ('id', 'ddc', 'nama');
+        $pm->select ('id, ddc, nama');
 
        return (new Datatable( $pm ))
-                ->setFieldFilter(['id', 'ddc', 'nama'])
+                ->setFieldFilter(['ddc', 'nama'])
                 ->draw();     
     }
     

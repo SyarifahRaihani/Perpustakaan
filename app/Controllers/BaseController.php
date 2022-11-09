@@ -40,10 +40,12 @@ abstract class BaseController extends Controller
 
     /**
      * @var Session
-
      */
     protected $session;
 
+    /**
+     * Constructor
+     */
     public function initController(RequestInterface $request, ResponseInterface $response, LoggerInterface $logger)
     {
         // Do Not Edit This Line
