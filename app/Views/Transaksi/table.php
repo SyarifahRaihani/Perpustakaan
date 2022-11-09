@@ -130,7 +130,12 @@
                 $('input[name=tgl_harus_kembali]').val(e.tgl_harus_kembali);
                 $('input[name=anggota_id]').val(e.anggota_id);
                 $('input[name=stokkoleksi]').val(e.stokkoleksi);
-                $('#modalForm').modal(show);
+                $('input[name=pustakawan_id]').val(e.pustakawan_id);
+                $('input[name=kembali_pustakawan]').val(e.kembali_pustakawan);
+                $('input[name=denda]').val(e.denda);
+                $('input[name=status]').val(e.status);
+                $('input[name=catatan]').val(e.catatan);
+                $('#modalForm').modal('show');
                 $('input[name=_method]').val('patch');
             });
         });

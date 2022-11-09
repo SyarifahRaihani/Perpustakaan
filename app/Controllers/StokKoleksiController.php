@@ -36,7 +36,7 @@ class StokKoleksiController extends BaseController
             'nomor'             => $this->request->getVar('nomor'),
             'status_tersedia'   => $this->request->getVar('status_tersedia'),
             'anggota_id'        => $this->request->getVar('anggota_id'),
-            'pustakawan'        => $this->request->getVar('pustakawan_id'),
+            'pustakawan_id'        => $this->request->getVar('pustakawan_id'),
         ]);
         return $this->response->setJSON(['id => $id'])
                     ->setStatusCode( intval($id) > 0 ? 200 : 406);

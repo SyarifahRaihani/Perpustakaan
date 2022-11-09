@@ -110,7 +110,7 @@
 
 <script>
     $(document).ready(function(){
-        $('form#formAngota').submitAjax({
+        $('form#formAnggota').submitAjax({
             pre:()=>{
                 $('button#btn-kirim').hide();
             },
@@ -189,7 +189,7 @@
                 { data: 'nama_belakang' },
                 { data: 'email'},
                 { data: 'nohp'},
-                { data: 'alamat'},
+                { data: 'alamat' },
                 { data: 'kota'},
                 { data: 'gender',
                     render:(data, type, meta, row)=>{

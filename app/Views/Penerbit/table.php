@@ -94,7 +94,7 @@
                 $('input[name=nama]').val(e.nama);
                 $('input[name=kota]').val(e.kota);
                 $('input[name=negara]').val(e.negara);
-                $('#modalForm').modal(show);
+                $('#modalForm').modal('show');
                 $('input[name=_method]').val('patch');
             });
         });
