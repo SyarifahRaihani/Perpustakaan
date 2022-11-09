@@ -81,7 +81,7 @@
             },
             success:(response, status)=>{
                 $("modalForm").modal('hide');
-                $("table#table-pelanggan").DataTable().ajax.reload();
+                $("table#tabel-pelanggan").DataTable().ajax.reload();
             },
             error: (xhr, status)=>{
                 alert('Maaf, data Stok Koleksi gagal direkam');
@@ -98,7 +98,7 @@
             $('input[name=_method]').val('');
         });
 
-        $('table#table-pelanggan').on('click', '.btn-edit', function(){
+        $('table#tabel-pelanggan').on('click', '.btn-edit', function(){
             let id = $(this).data('id');
             let baseurl = "<?=base_url()?>";
             $.get(`${baseurl}/stokkoleksi/${id}`).done((e)=>{
@@ -113,13 +113,13 @@
             });
         });
 
-        $('table#table-pelanggan').on('click', '.btn-hapus', function(){
+        $('table#tabel-pelanggan').on('click', '.btn-hapus', function(){
             let konfirmasi = confirm('Data Stok Koleksi akan dihapus, mau dilanjutkan?');
             if(konfirmasi === true){
                 let _id = $(this).data('id');
                 let baseurl = "<?=base_url()?>";
                 $.post(`${baseurl}/stokkoleksi`, {id:_id, _method:'delete'}).done(function(e){
-                    $('table#table-pelanggan').DataTable().ajax.reload();
+                    $('table#tabel-pelanggan').DataTable().ajax.reload();
                 })
             }
         });
@@ -159,8 +159,8 @@
                 { data: 'pustakawan_id'},
                 { data: 'id',
                     render: (data,type, meta, row)=>{
-                    var btnEdit = `<button class='btn-edit' data-id='${data}'>Edit</button>`;
-                    var btnHapus = `<button class='btn-hapus' data-id='${data}'>Hapus</button>`;
+                    var btnEdit = `<button class='btn-edit btn-warning' data-id='${data}'>Edit</button>`;
+                    var btnHapus = `<button class='btn-hapus btn-danger' data-id='${data}'>Hapus</button>`;
                     return btnEdit + btnHapus;
                     }
                 }

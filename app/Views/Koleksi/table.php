@@ -112,6 +112,22 @@
 
 <script>
     $(document).ready(function(){
+        $('form#formKoleksi').submitAjax({
+            pre:()=>{
+                $('button#btn-kirim').hide();
+            },
+            pasca:()=>{
+                $('button#btn-kirim').show();
+            },
+            success:(response, status)=>{
+                $("#modalForm").modal('hide');
+                $("table#tabel-pelanggan").DataTable().ajax.reload();
+            },
+            error:(xhr, status)=>{
+                alert('Maaf, data anggota gagal direkam');
+            }
+        });
+
         $('button#btn-kirim').on('click', function(){
             $('form#formKoleksi').submit();
         });
@@ -122,7 +138,7 @@
             $('input[name=_method]').val('');
         });
 
-        $('table#table-pelanggan').on('click', '.btn-edit', function(){
+        $('table#tabel-pelanggan').on('click', '.btn-edit', function(){
             let id = $(this).data('id');
             let baseurl = "<?=base_url()?>";
             $.get(`${baseurl}/koleksi/${id}`).done((e)=>{
@@ -146,13 +162,13 @@
             });
         });
 
-        $('table#table-pelanggan').on('click', '.btn-hapus', function(){
+        $('table#tabel-pelanggan').on('click', '.btn-hapus', function(){
             let konfirmasi = confirm('Data Koleksi akan dihapus, mau dilanjutkan?');
             if(konfirmasi === true){
                 let _id = $(this).data('id');
                 let baseurl = "<?=base_url()?>";
                 $.post(`${baseurl}/koleksi`, {id:_id, _method:'delete'}).done(function(e){
-                    $('table#table-pelanggan').DataTable().ajax.reload();
+                    $('table#tabel-pelanggan').DataTable().ajax.reload();
                 })
             }
         });
