@@ -39,4 +39,20 @@ class KoleksiModel extends Model
     protected $afterFind      = [];
     protected $beforeDelete   = [];
     protected $afterDelete    = [];
+
+    static public function view(){
+        $view = (new KoleksiModel())
+                ->select("koleksi.*, penerbit.nama as penerbit, klasifikasi.nama as klasifikasi,
+                         bahasa.kode as bahasa, kategori.nama as kategori, pustakawan.nama_lengkap as pustakawan ")
+                ->join( 'penerbit', 'koleksi.penerbit_id = penerbit.id', 'left')
+                ->join( 'klasifikasi', 'koleksi.klasifikasi_id = klasifikasi.id', 'left')
+                ->join( 'bahasa', 'koleksi.bahasa_id = bahasa.id', 'left')
+                ->join( 'kategori', 'koleksi.kategori_id = kategori.id', 'left')
+                ->join( 'pustakawan', 'koleksi.pustakawan_id = pustakawan.id', 'left')
+                ->builder();
+        $r = db_connect()->newQuery()->fromSubquery( $view,'tbl');
+        $r->table = 'tbl';
+        return $r;
+    }
 }
+

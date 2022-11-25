@@ -4,6 +4,9 @@ namespace App\Controllers;
 
 use Agoenxz21\Datatables\Datatable;
 use App\Controllers\BaseController;
+use App\Models\AnggotaModel;
+use App\Models\KoleksiModel;
+use App\Models\PustakawanModel;
 use App\Models\StokKoleksiModel;
 use CodeIgniter\Email\Email;
 use CodeIgniter\Exceptions\PageNotFoundException;
@@ -11,14 +14,18 @@ use CodeIgniter\HTTP\Message;
 
 class StokKoleksiController extends BaseController
 {
-    public function index(){
-        return view('StokKoleksi/table');
+    public function index()
+    {
+        return view('backend/StokKoleksi/table', [
+            'koleksi'       => (new KoleksiModel())->findAll(),
+            'anggota'       => (new AnggotaModel())->findAll(),
+            'pustakawan'    => (new PustakawanModel())->findAll()
+
+        ]);
     }
     public function all(){
-        $pm =new StokKoleksiModel();
-        $pm->select('id, koleksi_id, nomor, status_tersedia, anggota_id, pustakawan_id, ');
 
-        return (new Datatable( $pm ))
+        return (new Datatable( StokKoleksiModel::view() ))
                 ->setFieldFilter(['koleksi_id', 'nomor', 'status_tersedia', 'anggota_id', 'pustakawan_id' ])
                 ->draw();
     }

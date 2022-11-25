@@ -37,4 +37,17 @@ class StokKoleksiModel extends Model
     protected $afterFind      = [];
     protected $beforeDelete   = [];
     protected $afterDelete    = [];
+
+    static public function view(){
+        $view = (new StokKoleksiModel())
+                ->select("stokkoleksi.*, koleksi.judul as koleksi, anggota.nama_depan as anggota,
+                         pustakawan.nama_lengkap as pustakawan ")
+                ->join( 'koleksi', 'stokkoleksi.koleksi_id = koleksi.id', 'left')
+                ->join( 'anggota', 'stokkoleksi.anggota_id = anggota.id', 'left')
+                ->join( 'pustakawan', 'stokkoleksi.pustakawan_id = pustakawan.id', 'left')
+                ->builder();
+        $r = db_connect()->newQuery()->fromSubquery( $view,'tbl');
+        $r->table = 'tbl';
+        return $r;
+    }   
 }

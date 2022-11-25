@@ -4,7 +4,12 @@ namespace App\Controllers;
 
 use Agoenxz21\Datatables\Datatable;
 use App\Controllers\BaseController;
+use App\Models\BahasaModel;
+use App\Models\KategoriModel;
+use App\Models\KlasifikasiModel;
 use App\Models\KoleksiModel;
+use App\Models\PenerbitModel;
+use App\Models\PustakawanModel;
 use CodeIgniter\Email\Email;
 use CodeIgniter\Exceptions\PageNotFoundException;
 use CodeIgniter\HTTP\Message;
@@ -13,16 +18,21 @@ class KoleksiController extends BaseController
 {
     public function index()
     {
-        return view('Koleksi/table');
+        return view('backend/Koleksi/table', [
+            'penerbit'      => (new PenerbitModel())->findAll(),
+            'klasifikasi'   => (new KlasifikasiModel())->findAll(),
+            'bahasa'        => (new BahasaModel())->findAll(),
+            'kategori'      => (new KategoriModel())->findAll(),
+            'pustakawan'    => (new PustakawanModel())->findAll()
+
+        ]);
     }
 
     public function all()
     {
-        $pm = new KoleksiModel();
-        $pm->select('id, judul, jilid, edisi, penerbit_id, penulis, thn_terbit, klasifikasi_id, juml_halaman, isbn, bahasa_id, stok, eksemplar, kategori_id, pustakawan_id');
 
-        return (new Datatable( $pm ))
-            ->setFieldFilter(['judul', 'jilid', 'edisi', 'penerbit_id', 'penulis', 'thn_terbit', 'klasifikasi_id', 'juml_halaman', 'isbn', 'bahasa_id', 'stok', 'eksemplar', 'kategori_id', 'pustakawan_id'])
+        return (new Datatable( KoleksiModel::view() ))
+            ->setFieldFilter(['judul', 'penerbit','penulis','isbn'])
             ->draw();
     }
 
@@ -34,6 +44,8 @@ class KoleksiController extends BaseController
 
     public function store(){
         $pm = new KoleksiModel();
+
+        $pustakawan = session('pustakawan');
         $id = $pm->insert([
                 'judul'             => $this->request->getVar('judul'),
                 'jilid'             => $this->request->getVar('jilid'),
@@ -48,7 +60,7 @@ class KoleksiController extends BaseController
                 'stok'              => $this->request->getVar('stok'),
                 'eksemplar'         => $this->request->getVar('eksemplar'),
                 'kategori_id'       => $this->request->getVar('kategori_id'),
-                'pustakawan_id '    => $this->request->getVar('pustakawan_id'),
+                'pustakawan_id '    => $pustakawan['id']
         ]);
         return $this->response->setJSON(['id' => $id])
                     ->setStatusCode( intval($id) > 0 ? 200 : 406 );
@@ -60,6 +72,8 @@ class KoleksiController extends BaseController
         if( $pm->find($id) == null)
             throw PageNotFoundException::forPageNotFound();
             
+        $pustakawan = session('pustakawan');
+
          $hasil = $pm->update($id, [
             'judul'             => $this->request->getVar('judul'),
             'jilid'             => $this->request->getVar('jilid'),
@@ -74,7 +88,7 @@ class KoleksiController extends BaseController
             'stok'              => $this->request->getVar('stok'),
             'eksemplar'         => $this->request->getVar('eksemplar'),
             'kategori_id'       => $this->request->getVar('kategori_id'),
-            'pustakawan_id '    => $this->request->getVar('pustakawan_id'),
+            'pustakawan_id '    => $pustakawan['id']
          ]);
          return $this->response->setJSON(['result'=>$hasil]);   
     }

@@ -14,7 +14,7 @@ class PenerbitController extends BaseController
 {
     public function index()
     {
-        return view('Penerbit/table');
+        return view('backend/Penerbit/table');
     }
 
     public function all()

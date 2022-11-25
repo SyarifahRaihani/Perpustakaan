@@ -13,7 +13,7 @@ use CodeIgniter\HTTP\Message;
 class KlasifikasiController extends BaseController
 {
     public function index(){
-        return view('Klasifikasi/table');
+        return view('backend/Klasifikasi/table');
     }
 
     public function all(){

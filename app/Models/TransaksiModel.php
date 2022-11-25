@@ -39,4 +39,17 @@ class TransaksiModel extends Model
     protected $afterFind      = [];
     protected $beforeDelete   = [];
     protected $afterDelete    = [];
+
+    static public function view(){
+        $view = (new TransaksiModel())
+                ->select("transaksi.*, anggota.nama_depan as anggota, stokkoleksi.nomor as stokkoleksi, 
+                         pustakawan.nama_lengkap as pustakawan ")
+                ->join( 'anggota', 'transaksi.anggota_id = anggota.id', 'left')         
+                ->join( 'stokkoleksi', 'transaksi.stokkoleksi_id = stokkoleksi.id', 'left')
+                ->join( 'pustakawan', 'transaksi.pustakawan_id = pustakawan.id', 'left')
+                ->builder();
+        $r = db_connect()->newQuery()->fromSubquery( $view,'tbl');
+        $r->table = 'tbl';
+        return $r;
+    }  
 }
