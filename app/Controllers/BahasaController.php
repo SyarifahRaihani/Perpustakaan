@@ -13,7 +13,7 @@ class BahasaController extends BaseController
 {
     public function index()
     {
-        return view('Bahasa/table');
+        return view('backend/Bahasa/table');
     }
 
     public function all(){

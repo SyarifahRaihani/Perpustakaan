@@ -4,6 +4,9 @@ namespace App\Controllers;
 
 use Agoenxz21\Datatables\Datatable;
 use App\Controllers\BaseController;
+use App\Models\AnggotaModel;
+use App\Models\PustakawanModel;
+use App\Models\StokKoleksiModel;
 use App\Models\TransaksiModel;
 use CodeIgniter\Email\Email;
 use CodeIgniter\Exceptions\PageNotFoundException;
@@ -13,13 +16,15 @@ class TransaksiController extends BaseController
 {
     public function index()
     {
-        return view('Transaksi/table');
+        return view('backend/Transaksi/table', [
+            'anggota'          => (new AnggotaModel())->findAll(),
+            'stokkoleksi'      => (new StokKoleksiModel())->findAll(),
+            'pustakawan'       => (new PustakawanModel())->findAll()
+        ]);
     }
 
     public function all(){
-        $pm = new TransaksiModel();
-        $pm->select ('id, tgl_pinjam, tgl_harus_kembali, anggota_id, stokkoleksi_id, pustakawan_id, kembali_pustakawan_id, denda, status_trx, catatan');
-       return (new Datatable( $pm ))
+       return (new Datatable( TransaksiModel::view() ))
                 ->setFieldFilter(['tgl_pinjam', 'tgl_harus_kembali', 'anggota_id', 'stokkoleksi_id', 'pustakawan_id', 'kembali_pustakawan_id', 'denda', 'status_trx', 'catatan'])
                 ->draw();     
     }

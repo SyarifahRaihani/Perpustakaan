@@ -4,6 +4,8 @@ namespace App\Controllers;
 
 use Agoenxz21\Datatables\Datatable;
 use App\Controllers\BaseController;
+use App\Models\AnggotaModel;
+use App\Models\KoleksiModel;
 use App\Models\PemesananModel;
 use CodeIgniter\Email\Email;
 use CodeIgniter\Exceptions\PageNotFoundException;
@@ -13,14 +15,15 @@ use CodeIgniter\HTTP\Message;
 class PemesananController extends BaseController
 {
     public function index(){
-        return view('Pemesanan/table');
+        return view('backend/Pemesanan/table', [
+            'koleksi'   => (new KoleksiModel())->findAll(),
+            'anggota'   => (new AnggotaModel())->findAll(),
+        ]);
     }
 
     public function all(){
-        $pm = new PemesananModel();
-        $pm->select('id, tgl_awal, tgl_akhir, koleksi_id, anggota_id, status_pesan');
 
-        return (new Datatable( $pm ))
+        return (new Datatable( PemesananModel::view() ))
                 ->setFieldFilter(['tgl_awal', 'tgl_akhir', 'koleksi_id', 'anggota_id', 'status_pesan'])
                 ->draw();
     }
