@@ -2,11 +2,6 @@
 
 <?=$this->section('content')?>
 
-<!-- Page Heading -->
-<h1 class="h3 mb-2 text-gray-800">Tables</h1>
-<p class="mb-4">DataTables is a third party plugin that is used to generate the demo table below.
-    For more information about DataTables, please visit the <a target="_blank"
-        href="https://datatables.net">official DataTables documentation</a>.</p>
 
 <!-- DataTales Example -->
 <div class="card shadow mb-4">
@@ -52,89 +47,84 @@
                 <button class="btn-close" data-bs-dismiss="modal"></button>
             </div>
             <div class="modal-body">
-                <form id="formKoleksi" method="post" action="<?=base_url('koleksi')?>">
+                <form id="formKoleksi" method="post" action="<?=base_url('koleksi')?>" class="was-validated">
                     <input type="hidden" name="id" />
                     <input type="hidden" name="_method" />
                     <div class="mb-3">
                         <label class="form-label">Judul</label>
-                        <input type="text" name="judul" class="form-control" />
+                        <input type="text" name="judul" class="form-control" placeholder="Masukan Judul" required />
                     </div>
                     <div class="mb-3">
                         <label class="form-label">Jilid</label>
-                        <input type="text" name="jilid" class="form-control" />
+                        <input type="text" name="jilid" class="form-control" placeholder="Masukan Jilid" required />
                     </div>
                     <div class="mb-3">
                         <label class="form-label">Edisi</label>
-                        <input type="text" name="edisi" class="form-control" />
+                        <input type="text" name="edisi" class="form-control" placeholder="Masukan Edisi" required />
                     </div>
                     <div class="mb-3">
-                        <label class="form-label">Penerbit </label>
-                        <select name="penerbit_id" class="selok form-control">
-                            <option >Penerbit</option>
+                        <label class="form-label"> Penerbit</label>
+                        <select name="penerbit_id" class="form-control"  required aria-label="select example">
+                            <option value=""> Penerbit</option>
                             <?php foreach($penerbit as $pb):?>
                                 <option value='<?=$pb['id']?>'><?=$pb['nama']?></option>
                             <?php endforeach;?>
                         </select>
+                        <div class="invalid-feedback">Example invalid select feedback</div>
                     </div>
                     <div class="mb-3">
                         <label class="form-label">Penulis</label>
-                        <input type="text" name="penulis" class="form-control" />
+                        <input type="text" name="penulis" class="form-control" placeholder="Masukan Penulis" required />
                     </div>
                     <div class="mb-3">
                         <label class="form-label">Tahun Terbit</label>
-                        <input type="date" name="thn_terbit" class="form-control" />
+                        <input type="year" name="thn_terbit" class="form-control" placeholder="Masukan Tahun Terbit" required />
                     </div>
                     <div class="mb-3">
-                        <label class="form-label">Klasifikasi</label>
-                        <select name="klasifikasi_id" class="selok form-control">
-                            <option >Klasifikasi</option>
+                        <label class="form-label"> Klasifikasi</label>
+                        <select name="klasifikasi_id" class="form-control"  required aria-label="select example">
+                            <option value=""> Klasifikasi</option>
                             <?php foreach($klasifikasi as $ks):?>
                             <option value='<?=$ks['id']?>'><?=$ks['nama']?></option>
                             <?php endforeach;?>
                         </select>
+                        <div class="invalid-feedback">Example invalid select feedback</div>
                     </div>
                     <div class="mb-3">
                         <label class="form-label">Jumlah Halaman</label>
-                        <input type="text" name="juml_halaman" class="form-control" />
+                        <input type="text" name="juml_halaman" class="form-control" placeholder="Masukan Jumlah Halaman" required />
                     </div>
                     <div class="mb-3">
                         <label class="form-label">ISBN</label>
-                        <input type="text" name="isbn" class="form-control" />
+                        <input type="text" name="isbn" class="form-control" placeholder="Masukan ISBN" required />
                     </div>
                     <div class="mb-3">
-                        <label class="form-label">Bahasa</label>
-                        <select name="bahasa_id" class="selok">
-                        <option >Bahasa</option>
-                        <?php foreach($bahasa as $b):?>
+                        <label class="form-label"> Bahasa</label>
+                        <select name="bahasa_id" class="form-control"  required aria-label="select example">
+                            <option value=""> Bahasa</option>
+                            <?php foreach($bahasa as $b):?>
                             <option value='<?=$b['id']?>'><?=$b['nama']?></option>
                         <?php endforeach;?>
                         </select>
+                        <div class="invalid-feedback">Example invalid select feedback</div>
                     </div>
                     <div class="mb-3">
                         <label class="form-label">Stok</label>
-                        <input type="text" name="stok" class="form-control" />
+                        <input type="text" name="stok" class="form-control" placeholder="Masukan Stok" required />
                     </div>
                     <div class="mb-3">
                         <label class="form-label">Eksemplar</label>
-                        <input type="text" name="eksemplar" class="form-control" />
+                        <input type="text" name="eksemplar" class="form-control" placeholder="Masukan Eksemplar" required />
                     </div>
                     <div class="mb-3">
-                        <label class="form-label">Kategori</label>
-                        <select name="kategori_id" class="selok">
-                        <option >Penerbit</option>
-                        <?php foreach($kategori as $kt):?>
+                        <label class="form-label"> Kategori</label>
+                        <select name="kategori_id" class="form-control"  required aria-label="select example">
+                            <option value=""> Kategori</option>
+                            <?php foreach($kategori as $kt):?>
                             <option value='<?=$kt['id']?>'><?=$kt['nama']?></option>
-                        <?php endforeach;?>
+                            <?php endforeach;?>
                         </select>
-                    </div>
-                    <div class="mb-3">
-                        <label class="form-label">Pustakawan</label>
-                        <select name="pustakawan_id" class="selok">
-                        <option >Pustakawan</option>
-                        <?php foreach($pustakawan as $pk):?>
-                            <option value='<?=$pk['id']?>'><?=$pk['nama_lengkap']?></option>
-                        <?php endforeach;?>
-                        </select>
+                        <div class="invalid-feedback">Example invalid select feedback</div>
                     </div>
                 </form>     
             </div>
@@ -173,6 +163,7 @@
             success:(response, status)=>{
                 $("#modalForm").modal('hide');
                 $("table#tabel-pelanggan").DataTable().ajax.reload();
+                alert('Data berhasil ditambahkan')
             },
             error:(xhr, status)=>{
                 alert('Maaf, data anggota gagal direkam');
@@ -197,17 +188,17 @@
                 $('input[name=judul]').val(e.judul);
                 $('input[name=jilid]').val(e.jilid);
                 $('input[name=edisi]').val(e.edisi);
-                $('input[name=penerbit_id]').val(e.penerbit_id);
+                $('input[name=penerbit_id]').val(e.penerbit);
                 $('input[name=penulis]').val(e.penulis);
                 $('input[name=thn_terbit]').val(e.thn_terbit);
-                $('input[name=klasifikasi_id]').val(e.klasifikasi_id);
+                $('input[name=klasifikasi]').val(e.klasifikasi);
                 $('input[name=juml_halaman]').val(e.juml_halaman);
                 $('input[name=isbn]').val(e.isbn);
-                $('input[name=bahasa_id]').val(e.bahasa_id);
+                $('input[name=bahasa]').val(e.bahasa);
                 $('input[name=stok]').val(e.stok);
                 $('input[name=eksemplar]').val(e.eksemplar);
-                $('input[name=kategori_id]').val(e.kategori_id);
-                $('input[name=pustakawan_id]').val(e.pustakawan_id);
+                $('input[name=kategori]').val(e.kategori);
+                $('input[name=pustakawan]').val(e.pustakawan);
                 $('#modalForm').modal('show');
                 $('input[name=_method]').val('patch');
             });

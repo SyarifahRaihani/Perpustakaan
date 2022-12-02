@@ -109,6 +109,7 @@ $routes->group('anggota', ['filter'=>'otentikasi'], function(RouteCollection $ro
     $routes->delete('/', 'AnggotaController::delete');
     $routes->get('(:num)/berkas.jpg', 'AnggotaController::berkas/$1');
     $routes->get('(:num)', 'AnggotaController::show/$1');
+    $routes->get('(:num)/foto.jpg', 'AnggotaController::foto/$1');
     $routes->get('all', 'AnggotaController::all');
 });
 

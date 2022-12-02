@@ -24,12 +24,14 @@
                 <button class="btn-close" data-bs-dismiss="modal"></button>
             </div>
             <div class="modal-body">
-                <form id="formKategori" method="post" action="<?=base_url('kategori')?>">
+                <form id="formKategori" method="post" action="<?=base_url('kategori')?>" class="was-validated">
                     <input type="hidden" name="id" />
                     <input type="hidden" name="_method" />
                     <div class="mb-3">
                         <label class="form-label">Nama</label>
-                        <input type="text" name="nama" class="form-control" />
+                        <input type="text" name="nama" class="form-control" placeholder="Masukan Data Nama" required />
+                        <div class="valid-feedback">Valid.</div>
+                        <div class="invalid-feedback">Please fill out this field.</div>
                     </div>
                 </form>
             </div>
@@ -64,6 +66,7 @@
             success:(response, status)=>{
                 $("modalForm").modal('hide');
                 $("table#table-pelanggan").DataTable().ajax.reload();
+                alert('Data berhasil ditambahkan')
             },
             error: (xhr, status)=>{
                 alert('Maaf, data Bahasa gagal direkam');

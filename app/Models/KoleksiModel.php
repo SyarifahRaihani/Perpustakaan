@@ -43,7 +43,7 @@ class KoleksiModel extends Model
     static public function view(){
         $view = (new KoleksiModel())
                 ->select("koleksi.*, penerbit.nama as penerbit, klasifikasi.nama as klasifikasi,
-                         bahasa.kode as bahasa, kategori.nama as kategori, pustakawan.nama_lengkap as pustakawan ")
+                         bahasa.nama as bahasa, kategori.nama as kategori, pustakawan.nama_lengkap as pustakawan ")
                 ->join( 'penerbit', 'koleksi.penerbit_id = penerbit.id', 'left')
                 ->join( 'klasifikasi', 'koleksi.klasifikasi_id = klasifikasi.id', 'left')
                 ->join( 'bahasa', 'koleksi.bahasa_id = bahasa.id', 'left')

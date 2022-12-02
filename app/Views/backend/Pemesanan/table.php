@@ -7,10 +7,7 @@
        <div class="container-fluid">
 
 <!-- Page Heading -->
-<h1 class="h3 mb-2 text-gray-800">Tables</h1>
-<p class="mb-4">DataTables is a third party plugin that is used to generate the demo table below.
-    For more information about DataTables, please visit the <a target="_blank"
-        href="https://datatables.net">official DataTables documentation</a>.</p>
+
 
 <!-- DataTales Example -->
 <div class="card shadow mb-4">
@@ -50,43 +47,49 @@
                 <button class="btn-close" data-bs-dismiss="modal"></button>
             </div>
             <div class="modal-body">
-                <form id="formPemesanan" method="post" action="<?=base_url('pemesanan')?>">
+                <form id="formPemesanan" method="post" action="<?=base_url('pemesanan')?>" class="was-validated">
                     <input type="hidden" name="id" />
                     <input type="hidden" name="_method" />
                     <div class="mb-3">
                         <label class="form-label">Tanggal Awal</label>
-                        <input type="date" name="tgl_awal" class="form-control" />
+                            <input type="date" name="tgl_awal" class="form-control" aria-label="date example" required>
+                            <div class="invalid-feedback">Example invalid form file feedback</div>
                     </div>
                     <div class="mb-3">
                         <label class="form-label">Tanggal Akhir</label>
-                        <input type="date" name="tgl_akhir" class="form-control" />
+                            <input type="date" name="tgl_akhir" class="form-control" aria-label="date example" required>
+                            <div class="invalid-feedback">Example invalid form file feedback</div>
                     </div>
                     <div class="mb-3">
-                        <label class="form-label">Koleksi</label>
-                        <select name="koleksi_id" class="selok">
-                        <option >Koleksi</option>
-                        <?php foreach($koleksi as $kl):?>
+                        <label class="form-label"> Koleksi</label>
+                        <select name="koleksi_id" class="form-control" required aria-label="select example">
+                            <option value="">Koleksi</option>
+                            <?php foreach($koleksi as $kl):?>
                             <option value='<?=$kl['id']?>'><?=$kl['judul']?></option>
                         <?php endforeach;?>
                         </select>
+                        <div class="invalid-feedback">Example invalid select feedback</div>
                     </div>
                     <div class="mb-3">
-                        <label class="form-label">Anggota</label>
-                        <select name="anggota_id" class="selok">
-                        <option >Angota</option>
-                        <?php foreach($anggota as $ag):?>
+                        <label class="form-label"> Anggota</label>
+                        <select name="anggota_id" class="form-control" required aria-label="select example">
+                            <option value="">Angota</option>
+                            <?php foreach($anggota as $ag):?>
                             <option value='<?=$ag['id']?>'><?=$ag['nama_depan']?></option>
-                        <?php endforeach;?>
+                            <?php endforeach;?>
                         </select>
+                        <div class="invalid-feedback">Example invalid select feedback</div>
                     </div>
                     <div class="mb-3">
                         <label class="form-label">Status Pesan</label>
-                        <select name="status_pesan" class="form-control">
+                        <select name="status_pesan" class="form-control" required aria-label="select example">
+                            <option value="">Status Pesan</option>
                             <option value="B">Baru Pesan</option>
                             <option value="O">Oke</option>
                             <option value="X">Batal</option>
                         </select>
-                    </div>
+                        <div class="invalid-feedback">Example invalid select feedback</div>
+                    </div >
                 </form>
             </div>
             <div class="modal-footer">
@@ -124,6 +127,7 @@
             success:(response, status)=>{
                 $("modalForm").modal('hide');
                 $("table#table-pelanggan").DataTable().ajax.reload();
+                alert('Data berhasil ditambahkan')
             },
             error: (xhr, status)=>{
                 alert('Maaf, data Pemesanan gagal direkam');
@@ -143,12 +147,12 @@
         $('table#table-pelanggan').on('click', '.btn-edit', function(){
             let id = $(this).data('id');
             let baseurl = "<?=base_url()?>";
-            $.get(`${baseurl}/bahasa/${id}`).done((e)=>{
+            $.get(`${baseurl}/pemesanan/${id}`).done((e)=>{
                 $('input[name=id]').val(e.id);
                 $('input[name=tgl_awal]').val(e.tgl_awal);
                 $('input[name=tgl_akhir]').val(e.tgl_akhir);
-                $('input[name=koleksi_id]').val(e.koleksi_id);
-                $('input[name=anggota_id]').val(e.anggota_id);
+                $('input[name=koleksi]').val(e.koleksi);
+                $('input[name=anggota]').val(e.anggota);
                 $('input[name=status_pesan]').val(e.status_pesan);
                 $('#modalForm').modal('show');
                 $('input[name=_method]').val('patch');

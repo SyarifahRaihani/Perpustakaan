@@ -34,24 +34,28 @@
                 <button class="btn-close" data-bs-dismiss="modal"></button>
             </div>
             <div class="modal-body">
-                <form id="formPustakawan" method="post" action="<?=base_url('pustakawan')?>" >
+                <form id="formPustakawan" method="post" action="<?=base_url('pustakawan')?>" class="was-validated">
                     <input type="hidden" name="id" />
                     <input type="hidden" name="_method" />
                     <div class="mb-3">
                         <label class="form-label">Nama Lengkap </label>
-                        <input type="text" name="nama_lengkap" class="form-control" />
+                        <input type="text" name="nama_lengkap" class="form-control" placeholder="Masukan Data Nama Depan" required />
+                        <div class="valid-feedback">Valid.</div>
+                        <div class="invalid-feedback">Please fill out this field.</div>
                     </div>
                     <div class="mb-3">
                         <label class="form-label">Jenis Kelamin</label>
-                        <select name="gender" class="form-control">
-                            <option>Pilih Jenis Kelamin</option>
+                        <select name="gender" class="form-control" required aria-label="select example">
+                            <option value="">Jenis Kelamin</option>
                             <option value="L">Laki-Laki</option>
                             <option value="P">Perempuan</option>
                         </select>
-                    </div>
+                        <div class="invalid-feedback">Example invalid select feedback</div>
+                    </div >
                     <div class="mb-3">
                         <label class="form-label">Tanggal Lahir</label>
-                        <input type="date" name="tgl_lahir" class="form-control" />
+                            <input type="date" name="tgl_lahir" class="form-control" aria-label="date example" required>
+                            <div class="invalid-feedback">Example invalid form file feedback</div>
                     </div>
                     <div class="mb-3">
                         <label class="form-label">Level</label>
@@ -62,27 +66,39 @@
                     </div>
                     <div class="mb-3">
                         <label class="form-label">Email</label>
-                        <input type="email" name="email" class="form-control" />
+                        <input type="email" name="email" class="form-control" placeholder="Masukan  Email" required />
+                        <div class="valid-feedback">Valid.</div>
+                        <div class="invalid-feedback">Please fill out this field.</div>
                     </div>
                     <div class="mb-3">
                         <label class="form-label">Sandi</label>
-                        <input type="password" name="sandi" class="form-control" />
+                        <input type="password" name="sandi" class="form-control" placeholder="Masukan  Sandi" required />
+                        <div class="valid-feedback">Valid.</div>
+                        <div class="invalid-feedback">Please fill out this field.</div>
                     </div>
                     <div class="mb-3">
                         <label class="form-label">NO HP</label>
-                        <input type="text" name="nohp" class="form-control" />
+                        <input type="text" name="nohp" class="form-control" placeholder="Masukan  No HP" required />
+                        <div class="valid-feedback">Valid.</div>
+                        <div class="invalid-feedback">Please fill out this field.</div>
                     </div>
                     <div class="mb-3">
                         <label class="form-label">Alamat</label>
-                        <input type="text" name="alamat" class="form-control" />
+                        <input type="text" name="alamat" class="form-control" placeholder="Masukan  Alamat" required />
+                        <div class="valid-feedback">Valid.</div>
+                        <div class="invalid-feedback">Please fill out this field.</div>
                     </div>
                     <div class="form-label">Kota
                         <label class="form-label">Kota</label>
-                        <input type="text" name="kota" class="form-control" />
+                        <input type="text" name="kota" class="form-control" placeholder="Masukan  Kota" required />
+                        <div class="valid-feedback">Valid.</div>
+                        <div class="invalid-feedback">Please fill out this field.</div>
                     </div>
                     <div class="mb-3">
                         <label class="form-label">Token Reset</label>
-                        <input type="text" name="token_reset" />
+                        <input type="text" name="token_reset" class="form-control" placeholder="Masukan  Token Reset" required />
+                        <div class="valid-feedback">Valid.</div>
+                        <div class="invalid-feedback">Please fill out this field.</div>
                     </div>
                 </form>
             </div>
@@ -115,6 +131,7 @@
             success:(response, status)=>{
                 $("#modalForm").modal('hide');
                 $("table#tabel-pelanggan").DataTable().ajax.reload();
+                alert('Data berhasil ditambahkan')
             },
             error:(xhr, status)=>{
                 alert('Maaf, data pustakawan gagal direkam');

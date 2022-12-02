@@ -40,48 +40,44 @@
             <button class="btn-close" data-bs-dismiss="modal"></button> 
             </div>
             <div class="modal-body">
-                <form id="formStokKoleksi" method="post" action="<?=base_url('stokkoleksi')?>">
+                <form id="formStokKoleksi" method="post" action="<?=base_url('stokkoleksi')?>" class="was-validated">
                     <input type="hidden" name="id" />
                     <input type="hidden" name="_method" />
                     <div class="mb-3">
-                        <label class="form-label">Koleksi</label>
-                        <select name="koleksi_id" class="selok">
-                        <option >Koleksi</option>
-                        <?php foreach($koleksi as $kl):?>
+                        <label class="form-label"> Koleksi</label>
+                        <select name="koleksi_id" class="form-control" id="selok" required aria-label="select example">
+                            <option value=""> Koleksi</option>
+                            <?php foreach($koleksi as $kl):?>
                             <option value='<?=$kl['id']?>'><?=$kl['judul']?></option>
                         <?php endforeach;?>
                         </select>
+                        <div class="invalid-feedback">Example invalid select feedback</div>
                     </div>
                     <div class="mb-3">
                         <label class="form-label">Nomor</label>
-                        <input type="text" name="nomor" class="form-control" />
+                        <input type="text" name="nomor" class="form-control" placeholder="Masukan Nomor" required />
                     </div>
                     <div class="mb-3">
                         <label class="form-label">Status Tersedia</label>
-                            <select name="status_tersedia" class="form-control">
-                                <option value="A">Ada</option>
-                                <option value="P">Pinjam</option>
-                                <option value="R">Rusak</option>
-                                <option value="H">Hilang</option>
-                            </select>
-                    </div>
+                        <select name="status_tersedia" class="form-control" required aria-label="select example">
+                            <option value="">Status Tersedia</option>
+                            <option value="A">Ada</option>
+                            <option value="P">Pinjam</option>
+                            <option value="R">Rusak</option>
+                            <option value="H">Hilang</option>
+                        </select>
+                        <div class="invalid-feedback">Example invalid select feedback</div>
+                    </div >
                     <div class="mb-3">
-                        <label class="form-label">Anggota</label>
-                        <select name="anggota_id" class="selok">
-                        <option >Angota</option>
-                        <?php foreach($anggota as $ag):?>
+                        <label class="form-label"> Anggota</label>
+                        <select name="anggota_id" class="form-control" required aria-label="select example">
+                            <option value="">Angota</option>
+                            <?php foreach($anggota as $ag):?>
                             <option value='<?=$ag['id']?>'><?=$ag['nama_depan']?></option>
-                        <?php endforeach;?>
+                            <?php endforeach;?>
                         </select>
+                        <div class="invalid-feedback">Example invalid select feedback</div>
                     </div>
-                    <div class="mb-3">
-                        <label class="form-label">Pustakawan</label>
-                        <select name="pustakawan_id" class="selok">
-                        <option >Pustakawan</option>
-                        <?php foreach($pustakawan as $pk):?>
-                            <option value='<?=$pk['id']?>'><?=$pk['nama_lengkap']?></option>
-                        <?php endforeach;?>
-                        </select>
                 </form>
             </div>
             <div class="modal-footer">
@@ -107,6 +103,7 @@
             success:(response, status)=>{
                 $("modalForm").modal('hide');
                 $("table#tabel-pelanggan").DataTable().ajax.reload();
+                alert('Data berhasil ditambahkan')
             },
             error: (xhr, status)=>{
                 alert('Maaf, data Stok Koleksi gagal direkam');
@@ -128,11 +125,11 @@
             let baseurl = "<?=base_url()?>";
             $.get(`${baseurl}/stokkoleksi/${id}`).done((e)=>{
                 $('input[name=id]').val(e.id);
-                $('input[name=koleksi_id]').val(e.koleksi_id);
+                $('input[name=koleksi]').val(e.koleksi);
                 $('input[name=nomor]').val(e.nomor);
                 $('input[name=status_tersedia]').val(e.status_tersedia);
-                $('input[name=anggota_id]').val(e.anggota_id);
-                $('input[name=pustakawan_id]').val(e.pustakawan_id);
+                $('input[name=anggota]').val(e.anggota);
+                $('input[name=pustakawan]').val(e.pustakawan);
                 $('#modalForm').modal('show');
                 $('input[name=_method]').val('patch');
             });
@@ -167,7 +164,7 @@
                 { data: 'status_tersedia',
                     render:(data, type, meta, row)=>{
                     if(data === 'A')
-                    return 'Ada';
+                        return 'Ada';
                     else if( data === 'P'){
                         return 'Pinjam';
                     }

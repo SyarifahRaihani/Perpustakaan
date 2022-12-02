@@ -2,13 +2,10 @@
 <html>
     <head>
         <title>Login Sistem Informasi Perpustakaan</title>
-
         <meta name="viewport" content="width=device-width, initial-scale=1">
 
     </head>
     <body>
-
-    <?=$this->extend('backend/login/template')?>
 
         <div class="container">
             <form id="form-login" method="post" action="<?=base_url('/login')?>">
@@ -16,8 +13,8 @@
 
                 <div class="row">
                     <div class="form-froup col-md-4">
-                        <div class="mb-3">
-                            <label for="email" class="formilabel">Alamat Email</label>
+                        <div class="mb<label for="email" class="formilabel">Alamat Email</label>-3">
+                            
                             <input type="email" name="email" class="form-control" id="email"
                                     placeholder="nama@example.com">
                         </div>
