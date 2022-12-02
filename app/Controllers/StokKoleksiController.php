@@ -38,12 +38,13 @@ class StokKoleksiController extends BaseController
     public function store(){
         $pm     = new StokKoleksiModel();
 
+        $pustakawan = session('pustakawan');
         $id = $pm->insert([
             'koleksi_id'        => $this->request->getVar('koleksi_id'),
             'nomor'             => $this->request->getVar('nomor'),
             'status_tersedia'   => $this->request->getVar('status_tersedia'),
             'anggota_id'        => $this->request->getVar('anggota_id'),
-            'pustakawan_id'        => $this->request->getVar('pustakawan_id'),
+            'pustakawan_id'     => $pustakawan['id']
         ]);
         return $this->response->setJSON(['id => $id'])
                     ->setStatusCode( intval($id) > 0 ? 200 : 406);
@@ -54,13 +55,15 @@ class StokKoleksiController extends BaseController
 
         if( $pm->find($id) == null )
             throw PageNotFoundException::forPageNotFound();
+
+        $pustakawan = session('pustakawan');
             
         $hasil  = $pm->update($id, [
             'koleksi_id'        => $this->request->getVar('koleksi_id'),
             'nomor'             => $this->request->getVar('nomor'),
             'status_tersedia'   => $this->request->getVar('status_tersedia'),
             'anggota_id'        => $this->request->getVar('anggota_id'),
-            'pustakawan_id'     => $this->request->getVar('pustakawan_id'),
+            'pustakawan_id'     => $pustakawan['id']
         ]);
         return $this->response->setJSON(['result'=>$hasil]);
         

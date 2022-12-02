@@ -18,7 +18,10 @@ class AnggotaController extends BaseController
 
     public function all(){
         $pm = new AnggotaModel();
-        $pm->select('id, nama_depan, nama_belakang, email, nohp, alamat, kota, gender, tgl_daftar, status_aktif, berlaku_awal, berlaku_akhir');
+        $pm->select('id, nama_depan, nama_belakang, email, 
+                    nohp, alamat, kota, gender, tgl_daftar, 
+                    concat("'.base_url('anggota/').'", "/", id, "/foto.jpg") as foto,
+                    status_aktif, berlaku_awal, berlaku_akhir');
 
         return (new Datatable( $pm))
                 ->setFieldFilter(['nama_depan', 'nama_belakang', 'email', 'nohp', 'alamat', 'kota', 'gender', 'tgl_daftar', 'status_aktif', 'berlaku_awal', 'berlaku_akhir'])
@@ -43,14 +46,15 @@ class AnggotaController extends BaseController
             'alamat'        => $this->request->getVar('alamat'),
             'kota'          => $this->request->getVar('kota'),
             'gender'        => $this->request->getVar('gender'),
-            'foto'          => $this->request->getVar('foto'),
             'tgl_daftar'    => $this->request->getVar('tgl_daftar'),
             'status_aktif'  => $this->request->getVar('status_aktif'),
             'berlaku_awal'  => $this->request->getVar('berlaku_awal'),
             'berlaku_akhir' => $this->request->getVar('berlaku_akhir'),
         ]);
 
-    
+        if($id > 0){
+            $this->simpanFile($id);
+        }
         return $this->response->setJSON(['id' => $id])
                     ->setStatusCode( intval($id) > 0 ? 200 : 406 );
     }
@@ -75,7 +79,9 @@ class AnggotaController extends BaseController
             'berlaku_awal'  => $this->request->getVar('berlaku_awal'),
             'berlaku_akhir' => $this->request->getVar('berlaku_akhir'),
         ]);
-        
+        if($hasil == true){
+            $this->simpanFile($id);
+        }
         return $this->response->setJSON(['result'=>$hasil]);
     }
 
@@ -85,5 +91,41 @@ class AnggotaController extends BaseController
         $hasil  = $pm->delete($id);
         return $this->response->setJSON(['result' => $hasil ]);
     }
+
+    private function simpanFile($id){
+        $file = $this->request->getFile('berkas');
+
+        if($file->hasMoved() == false){
+            $patch = WRITEPATH . 'uploads/anggota/';
+ 
+            if(!file_exists($patch)){
+                @mkdir($patch, recursive: true);
+            }
+
+            $patch = $file->store(
+                            folderName: 'anggota',
+                            fileName: "$id.jpg"
+                        );
+            (new AnggotaModel())->update($id, [
+                'foto'=>$patch
+            ]);
+            return $patch;
+        }
+        return null;
+    }
+
+    public function foto($id){
+        $file = WRITEPATH . 'uploads/anggota/'.$id.'.jpg';
+
+        if(!file_exists($file)){
+            throw PageNotFoundException::forPageNotFound();
+        }
+
+        echo file_get_contents($file);
+        return $this->response
+                    ->setHeader('Content-type','image/jpeg')
+                    ->sendBody();
+    }
+
 
 }

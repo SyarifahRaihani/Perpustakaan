@@ -32,67 +32,60 @@
             <button class="btn-close" data-bs-dismiss="modal"></button>
             </div>
             <div class="modal-body">
-                <form id="formTransaksi" method="post" action="<?=base_url('transaksi')?>">
+                <form id="formTransaksi" method="post" action="<?=base_url('transaksi')?>" class="was-validated">
                 <input type="hidden" name="id" />
                 <input type="hidden" name="_method" />
                 <div class="mb-3">
                     <label class="form-label">Tanggal Pinjam</label>
-                    <input type="date" name="tgl_pinjam" class="form-control" />
+                    <input type="date" name="tgl_pinjam" class="form-control" aria-label="date example" required />
+                    <div class="invalid-feedback">Example invalid form file feedback</div>
                 </div>
                 <div class="mb-3">
-                    <label class="form-label">Tanggal Harus Kembali</label>
-                    <input type="date" name="tgl_harus_kembali" class="form-control" />
-                </div>
+                        <label class="form-label">Tanggal Harus Kembali</label>
+                            <input type="date" name="tgl_harus_kembali" class="form-control" aria-label="date example" required />
+                            <div class="invalid-feedback">Example invalid form file feedback</div>
+                    </div>
                 <div class="mb-3">
-                    <label class="form-label">Anggota</label>
-                    <select name="anggota_id" class="selok">
-                        <option >Angota</option>
-                        <?php foreach($anggota as $ag):?>
+                        <label class="form-label"> Anggota</label>
+                        <select name="anggota_id" class="form-control" required aria-label="select example">
+                            <option value="">Angota</option>
+                            <?php foreach($anggota as $ag):?>
                             <option value='<?=$ag['id']?>'><?=$ag['nama_depan']?></option>
-                        <?php endforeach;?>
-                    </select>
-                </div>
+                            <?php endforeach;?>
+                        </select>
+                        <div class="invalid-feedback">Example invalid select feedback</div>
+                    </div>
                 <div class="mb-3">
-                    <label class="form-label">Stok Koleksi</label>
-                    <select name="stokkoleksi_id" class="selok">
-                        <option >Stok Koleksi</option>
-                        <?php foreach($stokkoleksi as $sk):?>
+                        <label class="form-label">Stok Koleksi</label>
+                        <select name="stokkoleksi_id" class="form-control" required aria-label="select example">
+                            <option value="">Stok Koleksi</option>
+                            <?php foreach($stokkoleksi as $sk):?>
                             <option value='<?=$sk['id']?>'><?=$sk['nomor']?></option>
-                        <?php endforeach;?>
+                            <?php endforeach;?>
                         </select>
+                        <div class="invalid-feedback">Example invalid select feedback</div>
+                    </div>
                 <div class="mb-3">
-                    <label class="form-label">Pustakawan</label>
-                    <select name="pustakawan_id" class="selok">
-                        <option >Pustakawan</option>
-                        <?php foreach($pustakawan as $pk):?>
-                            <option value='<?=$pk['id']?>'><?=$pk['nama_lengkap']?></option>
-                        <?php endforeach;?>
-                        </select>
-                <div class="mb-3">
-                    <label class="form-label">Kembali Pustakawan</label>
-                    <select name="kembali_pustakawan_id" class="selok">
-                        <option >Pustakawan</option>
-                        <?php foreach($pustakawan as $pk):?>
-                            <option value='<?=$pk['id']?>'><?=$pk['nama_lengkap']?></option>
-                        <?php endforeach;?>
-                        </select>
+                        <label class="form-label">Denda</label>
+                        <input type="double" name="denda" class="form-control" placeholder="Masukan denda" required />
+                        <div class="valid-feedback">Valid.</div>
+                        <div class="invalid-feedback">Please fill out this field.</div>
                 </div>
                 <div class="mb-3">
-                    <label class="form-label">Denda</label>
-                    <input type="double" name="denda" class="form-control" />
-                </div>
-                <div class="mb-3">
-                    <label class="form-label">Status</label>
-                        <select name="status_trx" class="form-control">
-                            <option value="A">Ada</option>
-                            <option value="P">Pinjam</option>
+                        <label class="form-label">Status</label>
+                        <select name="status_trx" class="form-control" required aria-label="select example">
+                            <option value="">Status</option>
+                            <option value="K">Kembali</option>
                             <option value="R">Rusak</option>
                             <option value="H">Hilang</option>
                         </select>
-                </div>
+                        <div class="invalid-feedback">Example invalid select feedback</div>
+                    </div >
                 <div class="mb-3">
-                    <label class="form-label">Catatan</label>
-                    <input type="text" name="catatan" class="form-control" />
+                        <label class="form-label">Catatan</label>
+                        <input type="text" name="catatan" class="form-control" placeholder="Kondisi Buku" required />
+                        <div class="valid-feedback">Valid.</div>
+                        <div class="invalid-feedback">Please fill out this field.</div>
                 </div>
                 </form>
             </div>
@@ -131,6 +124,7 @@
             success:(response, status)=>{
                 $("modalForm").modal('hide');
                 $("table#table-pelanggan").DataTable().ajax.reload();
+                alert('Data berhasil ditambahkan')
             },
             error: (xhr, status)=>{
                 alert('Maaf, data Transaksi gagal direkam');
@@ -153,10 +147,10 @@
                 $('input[name=id]').val(e.id);
                 $('input[name=tgl_pinjam]').val(e.tgl_pinjam);
                 $('input[name=tgl_harus_kembali]').val(e.tgl_harus_kembali);
-                $('input[name=anggota_id]').val(e.anggota_id);
+                $('input[name=anggota]').val(e.anggota);
                 $('input[name=stokkoleksi]').val(e.stokkoleksi);
-                $('input[name=pustakawan_id]').val(e.pustakawan_id);
-                $('input[name=kembali_pustakawan]').val(e.kembali_pustakawan);
+                $('input[name=pustakawan]').val(e.pustakawan);
+                $('input[name=pustakawan]').val(e.pustakawan);
                 $('input[name=denda]').val(e.denda);
                 $('input[name=status]').val(e.status);
                 $('input[name=catatan]').val(e.catatan);
@@ -194,14 +188,14 @@
                 { data: 'anggota'},
                 { data: 'stokkoleksi' },
                 { data: 'pustakawan' },
-                { data: 'kembali_pustakawan'},
+                { data: 'pustakawan'},
                 { data: 'denda'},
                 { data: 'status_trx',
                     render:(data, type, meta, row)=>{
-                        if(data === 'A')
-                        return 'Ada';
-                        else if( data === 'P'){
-                            return 'Pinjam';
+                        if(data === 'P')
+                        return 'Pinjam';
+                        else if( data === 'K'){
+                            return 'Kembali';
                         }
                         else if( data === 'R'){
                             return 'Rusak'

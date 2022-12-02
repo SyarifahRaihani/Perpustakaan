@@ -26,16 +26,20 @@
                 <button class="btn-close" data-bs-dismiss="modal"></button>
             </div>
             <div class="modal-body">
-                <form id="formBahasa" method="post" action="<?=base_url('bahasa')?>">
+                <form id="formBahasa" method="post" action="<?=base_url('bahasa')?>" class="was-validated">
                         <input type="hidden" name="id" />
                         <input type="hidden" name="_method" />
                         <div class="mb-3">
                             <label class="form-label">Kode</label>
-                            <input type="text" name="kode" class="form-control" />
+                            <input type="text" name="kode" class="form-control" placeholder="Masukan Data Kode" required />
+                            <div class="valid-feedback">Valid.</div>
+                        <div class="invalid-feedback">Please fill out this field.</div>
                         </div>
                         <div class="mb-3">
                             <label class="form-label">Nama</label>
-                            <input type="text" name="nama" class="form-control" />
+                            <input type="text" name="nama" class="form-control" placeholder="Masukan Data Nama" required />
+                            <div class="valid-feedback">Valid.</div>
+                        <div class="invalid-feedback">Please fill out this field.</div>
                         </div>
                 </form>
             </div>
@@ -66,6 +70,7 @@
             },
             pasca:()=>{
                 $('button#btn-kirim').show();
+                alert('Data berhasil ditambahkan')
             },
             success:(response, status)=>{
                 $("modalForm").modal('hide');

@@ -27,20 +27,26 @@
                 <button class="btn-close" data-bs-dismiss="modal"></button>
             </div>
             <div class="modal-body">
-                <form id="formPenerbit" method="post" action="<?=base_url('penerbit')?>">
+                <form id="formPenerbit" method="post" action="<?=base_url('penerbit')?>" class="was-validated">
                     <input type="hidden" name="id" />
                     <input type="hidden" name="_method" />
                     <div class="mb-3">
                         <label class="form-label">Nama</label>
-                        <input type="text" name="nama" class="form-control" />
+                        <input type="text" name="nama" class="form-control" placeholder="Masukan Data Nama" required />
+                        <div class="valid-feedback">Valid.</div>
+                        <div class="invalid-feedback">Please fill out this field.</div>
                     </div>
                     <div class="mb-3">
                         <label class="form-label">Kota</label>
-                        <input type="text" name="kota" class="form-control" />
+                        <input type="text" name="kota" class="form-control" placeholder="Masukan Data Kota" required />
+                        <div class="valid-feedback">Valid.</div>
+                        <div class="invalid-feedback">Please fill out this field.</div>
                     </div>
                     <div class="mb-3">
                         <label class="form-label">Negara</label>
-                        <input type="text" name="negara" class="form-control" />
+                        <input type="text" name="negara" class="form-control" placeholder="Masukan Data Negara" required />
+                        <div class="valid-feedback">Valid.</div>
+                        <div class="invalid-feedback">Please fill out this field.</div>
                     </div>
                 </form>
             </div>
@@ -75,6 +81,7 @@
             success:(response, status)=>{
                 $("modalForm").modal('hide');
                 $("table#table-pelanggan").DataTable().ajax.reload();
+                alert('Data berhasil ditambahkan')
             },
             error: (xhr, status)=>{
                 alert('Maaf, data Penerbit gagal direkam');

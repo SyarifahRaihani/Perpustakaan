@@ -36,13 +36,15 @@ class TransaksiController extends BaseController
     }
     public function store(){
         $pm = new TransaksiModel();
+
+        $pustakawan = session('pustakawan');
         $id = $pm->insert([
                 'tgl_pinjam'            => $this->request->getVar('tgl_pinjam'),
                 'tgl_harus_kembali'     => $this->request->getVar('tgl_harus_kembali'),
                 'anggota_id'            => $this->request->getVar('anggota_id'),
                 'stokkoleksi_id'        => $this->request->getVar('stokkoleksi_id'),
-                'pustakawan_id'         => $this->request->getVar('pustakawan_id'),
-                'kembali_pustakawan_id' => $this->request->getVar('kembali_pustakawan_id'),
+                'pustakawan_id'         => $pustakawan['id'],
+                'kembali_pustakawan_id' => $pustakawan['id'],
                 'denda'                 => $this->request->getVar('denda'),
                 'status_trx'            => $this->request->getVar('status_trx'),
                 'catatan'               => $this->request->getVar('catatan'),
@@ -57,13 +59,15 @@ class TransaksiController extends BaseController
         if( $pm->find($id) == null)
             throw PageNotFoundException::forPageNotFound();
             
+            $pustakawan = session('pustakawan');
+
          $hasil = $pm->update($id, [
             'tgl_pinjam'            => $this->request->getVar('tgl_pinjam'),
             'tgl_harus_kembali'     => $this->request->getVar('tgl_harus_kembali'),
             'anggota_id'            => $this->request->getVar('anggota_id'),
             'stokkoleksi_id'        => $this->request->getVar('stokkoleksi_id'),
-            'pustakawan_id'         => $this->request->getVar('pustakawan_id'),
-            'kembali_pustakawan_id' => $this->request->getVar('kembali_pustakawan_id'),
+            'pustakawan_id'         => $pustakawan['id'],
+            'kembali_pustakawan_id' => $pustakawan['id'],
             'denda'                 => $this->request->getVar('denda'),
             'status_trx'            => $this->request->getVar('status_trx'),
             'catatan'               => $this->request->getVar('catatan'),

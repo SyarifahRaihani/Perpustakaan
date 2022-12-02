@@ -42,65 +42,82 @@
                 <button class="btn-close" data-bs-dismiss="modal"></button>
             </div>
             <div class="modal-body">
-                <form id="formAnggota" method="post" action="<?=base_url('anggota')?>" >
+                <form id="formAnggota" method="post" action="<?=base_url('anggota')?>" class="was-validated" >
                     <input type="hidden" name="id" />
                     <input type="hidden" name="_method" />
                     <div class="mb-3">
                         <label class="form-label">Nama Depan</label>
-                        <input type="text" name="nama_depan" class="form-control" />
+                        <input type="text" name="nama_depan" class="form-control"  placeholder="Masukan Data Nama Depan" required />
+                        <div class="valid-feedback">Valid.</div>
+                        <div class="invalid-feedback">Please fill out this field.</div>
                     </div>
                     <div class="mb-3">
-                        <label class="form-label">Nama Belakang</label>
-                        <input type="text" name="nama_belakang" class="form-control" />
+                        <label class="form-label">nama_belakang</label>
+                        <input type="text" name="nama_belakang" class="form-control"  placeholder="Masukan Data Nama Belakang" required />
+                        <div class="valid-feedback">Valid.</div>
+                        <div class="invalid-feedback">Please fill out this field.</div>
                     </div>
                     <div class="mb-3">
                         <label class="form-label">Email</label>
-                        <input type="email" name="email" class="form-control" />
+                        <input type="email" name="email" class="form-control"  placeholder="Masukan Data  Email" required />
+                        <div class="valid-feedback">Valid.</div>
+                        <div class="invalid-feedback">Please fill out this field.</div>
                     </div>
                     <div class="mb-3">
                         <label class="form-label">No HP</label>
-                        <input type="text" name="nohp" class="form-control" />
+                        <input type="text" name="nohp" class="form-control"  placeholder="Masukan Data No HP" required />
+                        <div class="valid-feedback">Valid.</div>
+                        <div class="invalid-feedback">Please fill out this field.</div>
                     </div>
                     <div class="mb-3">
                         <label class="form-label">Alamat</label>
-                        <input type="text" name="alamat" class="form-control" />
+                        <input type="text" name="alamat" class="form-control"  placeholder="Masukan Data Alamat" required />
+                        <div class="valid-feedback">Valid.</div>
+                        <div class="invalid-feedback">Please fill out this field.</div>
                     </div>
                     <div class="mb-3">
                         <label class="form-label">Kota</label>
-                        <input type="text" name="kota" class="form-control" />
+                        <input type="text" name="kota" class="form-control" placeholder="Masukan Data Kota" required />
+                        <div class="valid-feedback">Valid.</div>
+                        <div class="invalid-feedback">Please fill out this field.</div>
                     </div>
                     <div class="mb-3">
                         <label class="form-label">Gender</label>
-                        <select name="gender" class="form-control">
-                            <option>Pilih Jenis Kelamin</option>
+                        <select name="gender" class="form-control" required aria-label="select example">
+                            <option value="">Pilih Jenis Kelamin</option>
                             <option value="L">Laki-Laki</option>
                             <option value="P">Perempuan</option>
-                            </select>
+                        </select>
+                        <div class="invalid-feedback">Example invalid select feedback</div>
+                    </div>
+                    <div class="mb-3"   id="foto">
+                        <div class="invalid-feedback">Example invalid form file feedback</div>
                     </div>
                     <div class="mb-3">
-                        <label class="form-label">Foto</label>
-                        <input type="image" name="foto" class="form-control" />
-                    </div>
-                    <div class="mb-3">
-                        <label class="form-label">Tanggal Daftar</label>
-                        <input type="date" name="tgl_daftar" class="form-control" />
+                    <label class="form-label">Tanggal Daftar</label>
+                        <input type="date" name="tgl_daftar" class="form-control" aria-label="date example" required>
+                        <div class="invalid-feedback">Example invalid form file feedback</div>
                     </div>
                     <div class="mb-3">
                         <label class="form-label">Status Aktif</label>
-                        <select name="status_aktif" class="form-control">
+                        <select name="status_aktif" class="form-control" required aria-label="select example">
+                            <option value="">Status</option>
                             <option value="A">Aktif</option>
                             <option value="N">Non Aktif</option>
                         </select>
+                        <div class="invalid-feedback">Example invalid select feedback</div>
                     </div>
                     <div class="mb-3">
-                        <label class="form-label">Berlaku Awal</label>
-                        <input type="date" name="berlaku_awal" class="form-control" />
+                    <label class="form-label">Berlaku Awal</label>
+                        <input type="date" name="berlaku_awal" class="form-control" aria-label="date example" required>
+                        <div class="invalid-feedback">Example invalid form file feedback</div>
                     </div>
                     <div class="mb-3">
-                        <label class="form-label">Berlaku Akhir</label>
-                        <input type="date" name="berlaku_akhir" class="form-control" />
+                    <label class="form-label">Berlaku Akhir</label>
+                        <input type="date" name="berlaku_akhir" class="form-control" aria-label="date example" required>
+                        <div class="invalid-feedback">Example invalid form file feedback</div>
                     </div>
-
+                    
                 </form>
             </div>
             <div class="modal-footer">
@@ -115,13 +132,22 @@
 <?=$this->Section('script')?>
 <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js" 
     crossorigin="anonymous"></script>
-<script src="https://cdn.jsdelivr.net/gh/agoenxz2186/submitAjax@develop/submit_ajax.js">
+<script src="https://cdn.jsdelivr.net/gh/agoenxz2186/submitAjax@develop/submit_ajax.js"></script>
 
-</script>
+<script src="//cdn.jsdelivr.net/gh/JeremyFagis/dropify@master/dist/js/dropify.min.js"></script>
+<link href="//cdn.jsdelivr.net/gh/JeremyFagis/dropify@master/dist/css/dropify.min.css" rel="stylesheet" />
+
 <link href="//cdn.datatables.net/1.12.1/css/jquery.dataTables.min.css" rel="stylesheet">
 <script src="//cdn.datatables.net/1.12.1/js/jquery.dataTables.min.js"></script>
 
 <script>
+    function buatDropify(filename=''){
+        $('div#foto').html(`<input type="file"
+                                   name="berkas"
+                                   data-allowed-file-extensions="png jpg bmp gif"
+                                   data-default-file="${filename}">`);
+        $('input[name=berkas]').dropify();
+    }
     $(document).ready(function(){
         $('form#formAnggota').submitAjax({
             pre:()=>{
@@ -133,6 +159,7 @@
             success:(response, status)=>{
                 $("#modalForm").modal('hide');
                 $("table#tabel-pelanggan").DataTable().ajax.reload();
+                alert('Data berhasil ditambahkan')
             },
             error:(xhr, status)=>{
                 alert('Maaf, data anggota gagal direkam');
@@ -147,6 +174,7 @@
             $('#modalForm').modal('show');
             $('form#formAnggota').trigger('reset');
             $('input[name=_method]').val('');
+            buatDropify();
         });
 
         $('table#tabel-pelanggan').on('click', '.btn-edit',  function(){
@@ -160,12 +188,11 @@
                 $('input[name=nohp]').val(e.nohp);
                 $('input[name=alamat]').val(e.alamat);
                 $('input[name=kota]').val(e.kota);
-                $('input[name=gender]').val(e.gender);
-                $('input[name=foto]').val(e.foto);
                 $('input[name=tgl_daftar]').val(e.tgl_daftar);
                 $('input[name=status_aktif]').val(e.status_aktif);
                 $('input[name=berlaku_awal]').val(e.berlaku_awal);
                 $('input[name=berlaku_akhir]').val(e.berlaku_akhir);
+                buatDropify(e?.filename ?? '');
                 $('#modalForm').modal('show');
                 $('input[name=_method]').val('patch');
 
@@ -214,7 +241,9 @@
                     return data;
                     }
                 },
-                { data: 'foto', },
+                { data: 'foto', render:(data,type,meta,row)=>{
+                    return `<img src="${data}" height="60px">`;
+                }},
                 { data: 'tgl_daftar'},
                 { data: 'status_aktif'},
                 { data: 'berlaku_awal'},

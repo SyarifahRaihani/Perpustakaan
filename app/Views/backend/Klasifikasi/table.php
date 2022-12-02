@@ -5,7 +5,7 @@
     
 <div class="container">
     <button class="float-end btn btn-sm btn-primary" id="btn-tambah">Tambah</button>
-
+    
     <table id='table-pelanggan' class="datatable table-bordered">
         <thead>
             <tr>
@@ -26,16 +26,20 @@
                 <button class="btn-close" data-bs-dismiss="modal"></button>
             </div>
             <div class="modal-body">
-                <form id="formKlasifikasi" method="post" action="<?=base_url('klasifikasi')?>">
+                <form id="formKlasifikasi" method="post" action="<?=base_url('klasifikasi')?>" class="was-validated">
                     <input type="hidden" name="id" />
                     <input type="hidden" name="_method" />
                     <div class="mb-3">
-                        <label class="form-label">DDC</label>
-                        <input type="text" name="ddc" class="form-control" />
+                        <label for="ddc">DDC</label>
+                        <input type="text" name="ddc" class="form-control"  placeholder="Masukan Data DDC" required />
+                        <div class="valid-feedback">Valid.</div>
+                        <div class="invalid-feedback">Please fill out this field.</div>
                     </div>
                     <div class="mb-3">
                         <label class="form-label">Nama</label>
-                        <input type="text" name="nama" class="form-control" />
+                        <input type="text" name="nama" class="form-control"  placeholder="Masukan Data Nama" required />
+                        <div class="valid-feedback">Valid.</div>
+                        <div class="invalid-feedback">Please fill out this field.</div>
                     </div>
                 </form>
             </div>
@@ -70,6 +74,7 @@
             success:(response, status)=>{
                 $("modalForm").modal('hide');
                 $("table#table-pelanggan").DataTable().ajax.reload();
+                alert('Data berhasil ditambahkan')
             },
             error: (xhr, status)=>{
                 alert('Maaf, data Klasifikasi gagal direkam');

@@ -36,7 +36,7 @@ class PustakawanController extends BaseController
     }
    
     public function viewLogin(){
-        return view('backend/login/login');
+        return view('backend/login/template');
     }
 
     public function lupaPassword()
