@@ -6,48 +6,34 @@ use CodeIgniter\Test\FeatureTestTrait;
 /**
  * @internal
  */
-class StokKoleksiTest extends CIUnitTestCase{
-
+class BahasaTest extends CIUnitTestCase{
+    
     use FeatureTestTrait;
 
-    public function testLogin(){
-        $this->call('post', 'login',[
-            'kode'        => '',
-            'nama'        => '',
-        ])->assertStatus(200);
-    }
-
     public function testCreateShowUpdateDelete(){
-        $json = $this->call('post', 'Bahasa',[
+       $json = $this->call('post' , 'bahasa' , [
             'kode'        => '',
             'nama'        => '',
-        ])->getJSON();
+       ])->getJSON();
         $js = json_decode($json, true);
+        $this->assertNotTrue(isset ( $js['id']) > 0);
 
-        $this->assertTrue($js['id'] > 0);
-
-        $this->call('get', "Bahasa/".$js['id'])
-                ->assertStatus(200);
-
-        $this->call('patch', 'Bahasa',[
-            
-            'id'    => $js['id']
-        ])->assertStatus(200);
-
-        $this->call('delete', 'Bahasa',[
-            'id'    => $js['id']
-        ])->assertStatus(200);
-    }
-
+        $this->call('get', "bahasa/". isset ($js['id']))
+             ->assertStatus(302);
+             $this->call('patch' , 'bahasa' ,[
+                'kode'        => '',
+                'nama'        => '',
+                
+                'id' => isset( $js['id'])
+                ])->assertStatus(302);
+                
+            $this->call('delete' , 'bahasa', [
+                'id' => isset($js['id'])
+            ])->assertStatus(302);
+        }
     
-    public function testRead(){
-        $this->call('get', 'Bahasa/all')
-                ->assertStatus(200);
+        public function testRead(){
+            $this->call('get' , 'bahasa/all' )
+                 ->assertStatus(302);
     }
-
-    public function testLogout(){
-    $this->call('delete', 'login')
-            ->assertStatus(302);
-    }
-
 }
