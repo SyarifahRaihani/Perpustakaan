@@ -6,46 +6,32 @@ use CodeIgniter\Test\FeatureTestTrait;
 /**
  * @internal
  */
-class StokKoleksiTest extends CIUnitTestCase{
-
+class KategoriTest extends CIUnitTestCase{
+    
     use FeatureTestTrait;
 
-    public function testLogin(){
-        $this->call('post', 'login',[
-            'nama'        => '',
-        ])->assertStatus(200);
-    }
-
     public function testCreateShowUpdateDelete(){
-        $json = $this->call('post', 'Kategori',[
+       $json = $this->call('post' , 'kategori' , [
             'nama'        => '',
-        ])->getJSON();
+       ])->getJSON();
         $js = json_decode($json, true);
+        $this->assertNotTrue(isset ( $js['id']) > 0);
 
-        $this->assertTrue($js['id'] > 0);
-
-        $this->call('get', "Kategori/".$js['id'])
-                ->assertStatus(200);
-
-        $this->call('patch', 'Kategori',[
-            
-            'id'    => $js['id']
-        ])->assertStatus(200);
-
-        $this->call('delete', 'Kategori',[
-            'id'    => $js['id']
-        ])->assertStatus(200);
-    }
-
+        $this->call('get', "kategori/". isset ($js['id']))
+             ->assertStatus(302);
+             $this->call('patch' , 'kategori' ,[
+                'nama'        => '',
+                
+                'id' => isset( $js['id'])
+                ])->assertStatus(302);
+                
+            $this->call('delete' , 'kategori', [
+                'id' => isset($js['id'])
+            ])->assertStatus(302);
+        }
     
-    public function testRead(){
-        $this->call('get', 'Kategori/all')
-                ->assertStatus(200);
+        public function testRead(){
+            $this->call('get' , 'kategori/all' )
+                 ->assertStatus(302);
     }
-
-    public function testLogout(){
-    $this->call('delete', 'login')
-            ->assertStatus(302);
-    }
-
 }

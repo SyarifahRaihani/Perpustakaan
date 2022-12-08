@@ -6,25 +6,12 @@ use CodeIgniter\Test\FeatureTestTrait;
 /**
  * @internal
  */
-class StokKoleksiTest extends CIUnitTestCase{
-
+class TransaksiTest extends CIUnitTestCase{
+    
     use FeatureTestTrait;
 
-    public function testLogin(){
-        $this->call('post', 'login',[
-            'tgl_pinjam'            => '',
-            'anggota_id'            => '',
-            'stokkoleksi_id'        => '',
-            'pustakawan_id'         => '',
-            'kembali_pustakawan_id' => '',
-            'denda'                 => '',
-            'status_trx'            => '',
-            'catatan'               => '',
-        ])->assertStatus(200);
-    }
-
     public function testCreateShowUpdateDelete(){
-        $json = $this->call('post', 'Transaksi',[
+       $json = $this->call('post' , 'transaksi' , [
             'tgl_pinjam'            => '',
             'anggota_id'            => '',
             'stokkoleksi_id'        => '',
@@ -33,33 +20,31 @@ class StokKoleksiTest extends CIUnitTestCase{
             'denda'                 => '',
             'status_trx'            => '',
             'catatan'               => '',
-        ])->getJSON();
+       ])->getJSON();
         $js = json_decode($json, true);
+        $this->assertNotTrue(isset ( $js['id']) > 0);
 
-        $this->assertTrue($js['id'] > 0);
-
-        $this->call('get', "Transaksi/".$js['id'])
-                ->assertStatus(200);
-
-        $this->call('patch', 'Transaksi',[
-            
-            'id'    => $js['id']
-        ])->assertStatus(200);
-
-        $this->call('delete', 'Transaksi',[
-            'id'    => $js['id']
-        ])->assertStatus(200);
-    }
-
+        $this->call('get', "transaksi/". isset ($js['id']))
+             ->assertStatus(302);
+             $this->call('patch' , 'transaksi' ,[
+            'tgl_pinjam'            => '',
+            'anggota_id'            => '',
+            'stokkoleksi_id'        => '',
+            'pustakawan_id'         => '',
+            'kembali_pustakawan_id' => '',
+            'denda'                 => '',
+            'status_trx'            => '',
+            'catatan'               => '',
+                'id' => isset( $js['id'])
+                ])->assertStatus(302);
+                
+            $this->call('delete' , 'transaksi', [
+                'id' => isset($js['id'])
+            ])->assertStatus(302);
+        }
     
-    public function testRead(){
-        $this->call('get', 'Transaksi/all')
-                ->assertStatus(200);
+        public function testRead(){
+            $this->call('get' , 'transaksi/all' )
+                 ->assertStatus(302);
     }
-
-    public function testLogout(){
-    $this->call('delete', 'login')
-            ->assertStatus(302);
-    }
-
 }

@@ -7,48 +7,32 @@ use CodeIgniter\Test\FeatureTestTrait;
  * @internal
  */
 class KlasifikasiTest extends CIUnitTestCase{
-
+    
     use FeatureTestTrait;
 
-    public function testLogin(){
-        $this->call('post', 'login',[
-            'ddc'   => '000-099',
-            'nama'  => 'karya umum'
-        ])->assertStatus(200);
-    }
-
     public function testCreateShowUpdateDelete(){
-        $json = $this->call('post', 'Klasifikasi',[
-            'ddc'   => 'Testing ddc',
-            'nama'  => 'karya umum'
-        ])->getJSON();
+       $json = $this->call('post' , 'klasifikasi' , [
+        'ddc'   => '',
+        'nama'  => '',
+       ])->getJSON();
         $js = json_decode($json, true);
+        $this->assertNotTrue(isset ( $js['id']) > 0);
 
-        $this->assertTrue($js['id'] > 0);
-
-        $this->call('get', "Klasifikasi/".$js['id'])
-                ->assertStatus(200);
-
-        $this->call('patch', 'Klasifikasi',[
-            'ddc'   => 'Testing klasifikasi update',
-            'nama'  => 'karya umum',
-            'id'    => $js['id']
-        ])->assertStatus(200);
-
-        $this->call('delete', 'klasifikasi',[
-            'id'    => $js['id']
-        ])->assertStatus(200);
-    }
-
+        $this->call('get', "klasifikasi/". isset ($js['id']))
+             ->assertStatus(302);
+             $this->call('patch' , 'klasifikasi' ,[
+                'ddc'   => '',
+                'nama'  => '',
+                'id' => isset( $js['id'])
+                ])->assertStatus(302);
+                
+            $this->call('delete' , 'klasifikasi', [
+                'id' => isset($js['id'])
+            ])->assertStatus(302);
+        }
     
-    public function testRead(){
-        $this->call('get', 'klasifikasi/all')
-                ->assertStatus(200);
+        public function testRead(){
+            $this->call('get' , 'klasifikasi/all' )
+                 ->assertStatus(302);
     }
-
-    public function testLogout(){
-    $this->call('delete', 'login')
-            ->assertStatus(302);
-    }
-
 }
